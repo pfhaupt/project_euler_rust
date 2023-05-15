@@ -1,6 +1,7 @@
 use std::collections::HashSet;
 
 fn main() {
+    // https://projecteuler.net/problem=32
     /* 
     Products can only be 4-digit numbers
     If it were a 3-digit number, both multiplicand and multiplier would have to be 3-digit too to be pandigital

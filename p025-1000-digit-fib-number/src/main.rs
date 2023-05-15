@@ -1,6 +1,7 @@
 use num_bigint::BigUint;
 
 fn main() {
+    // https://projecteuler.net/problem=25
     const GOAL: usize = 1000;
     let mut a = BigUint::from(0u32);
     let mut b = BigUint::from(1u32);

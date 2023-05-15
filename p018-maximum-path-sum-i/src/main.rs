@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=18
     let input = 
 "75
 95 64

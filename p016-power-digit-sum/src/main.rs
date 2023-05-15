@@ -1,6 +1,7 @@
 use num_bigint::BigUint;
 
 fn main() {
+    // https://projecteuler.net/problem=16
     let n = BigUint::from(2u32);
     let mut result = n.clone();
     for _ in 1..1000 {

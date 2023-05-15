@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=6
     const N: i32 = 100;
     let mut sum = 0;
     let mut prod = 0;

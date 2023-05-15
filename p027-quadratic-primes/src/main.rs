@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=27
     const MAX: i64 = 1000;
 
     let mut record_a = 0;
@@ -21,7 +22,7 @@ fn main() {
             }
         }
     }
-    println!("{} primes for a={} b={} and a*b={}", record_n, record_a, record_b, record_a * record_b);
+    println!("{}", record_a * record_b);
 }
 
 fn is_prime(n: i64) -> bool {

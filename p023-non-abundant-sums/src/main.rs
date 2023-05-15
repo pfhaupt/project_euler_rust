@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=23
     const MAX: usize = 100;
 
     let mut abundant: Vec<usize> = vec![];

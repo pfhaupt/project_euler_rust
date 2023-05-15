@@ -1,12 +1,13 @@
 
 const GOAL: u32 = 200;
 // UK
-// const COURSE: [u32; 8] = [200, 100, 40, 20, 10, 4, 2, 1];
-// const WORTH: [u32; 8] = [1, 2, 5, 10, 20, 50, 100, 200];
+const COURSE: [u32; 8] = [200, 100, 40, 20, 10, 4, 2, 1];
+const WORTH: [u32; 8] = [1, 2, 5, 10, 20, 50, 100, 200];
 // US
-const COURSE: [u32; 7] = [200, 40, 20, 8, 4, 2, 1];
-const WORTH: [u32; 7] = [1, 5, 10, 25, 50, 100, 200];
+// const COURSE: [u32; 7] = [200, 40, 20, 8, 4, 2, 1];
+// const WORTH: [u32; 7] = [1, 5, 10, 25, 50, 100, 200];
 fn main() {
+    // https://projecteuler.net/problem=31
     let result = check_balance(COURSE.len() as i32 - 1, 0);
     println!("{}", result);
 }

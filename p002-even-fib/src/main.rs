@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=2
     let mut sum = 0;
     let mut a = 0;
     let mut b = 1;

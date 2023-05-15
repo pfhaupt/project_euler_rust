@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=30
     const POWER: u32 = 5;
     const UPPER_BOUND: u64 = 9u64.pow(POWER) * (POWER - 1) as u64;
     let mut total = 0;

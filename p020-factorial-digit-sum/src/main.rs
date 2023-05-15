@@ -1,6 +1,7 @@
 use num_bigint::BigUint;
 
 fn main() {
+    // https://projecteuler.net/problem=20
     let mut n = BigUint::from(1u32);
     for i in 1..100u32 {
         n = n * i;

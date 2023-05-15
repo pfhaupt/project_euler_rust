@@ -5,6 +5,7 @@ const HEIGHT: usize = WIDTH;
 
 
 fn main() {
+    // https://projecteuler.net/problem=15
     /*
     This solution implements a dynamic programming solution:
     Starting at the edge cases (every vertex at the bottom or right edge has exactly one possible path),

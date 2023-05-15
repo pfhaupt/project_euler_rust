@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=7
     let mut prime_counter = 0;
     let mut n = 2;
     loop {

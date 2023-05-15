@@ -36,6 +36,7 @@ fn is_first(date: &Date) -> bool {
 }
 
 fn main() {
+    // https://projecteuler.net/problem=19
     let mut current_date = Date { day: 1, month: 1, year: 1900 };
     let mut sunday_on_first = 0;
     let mut day_of_the_week = 0;

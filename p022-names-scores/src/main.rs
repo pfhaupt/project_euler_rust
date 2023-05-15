@@ -1,6 +1,7 @@
 use std::fs;
 
 fn main() {
+    // https://projecteuler.net/problem=22
     let contents = fs::read_to_string("src/names.txt")
         .expect("Something went wrong when loading the file!");
 

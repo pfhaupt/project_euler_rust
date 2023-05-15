@@ -8,6 +8,7 @@ const TENS: [&str; 10] = [
 ];
 
 fn main() {
+    // https://projecteuler.net/problem=17
     const MAX: usize = 1000;
     let mut sum = 0;
     for n in 1..=MAX {

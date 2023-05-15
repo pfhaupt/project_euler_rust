@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=26
     const MAX: u64 = 1000;
     let period_cycles: Vec<u64> = (0..=MAX).map(|n| get_cycle_len(n)).collect();
     let mut max = 0;
