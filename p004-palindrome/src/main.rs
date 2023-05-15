@@ -1,7 +1,7 @@
 fn main() {
     let mut record = 0;
-    for n in 0..1000 {
-        for m in 0..1000 {
+    for n in 100..1000 {
+        for m in 100..1000 {
             let product = n * m;
             let mut palindrome = 0;
             let mut tmp_product = product;
