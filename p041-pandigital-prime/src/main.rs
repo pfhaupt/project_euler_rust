@@ -4,8 +4,8 @@ fn main() {
     let mut n: usize = 1;
     let mut biggest = 0;
     loop {
-        if n == 9 {
-            // we can stop at 8 digits, because all 9-digit pandigitals are divisible by 3.
+        if n == 8 {
+            // we can stop at 7 digits, because all 8- and 9-digit pandigitals are divisible by 3.
             break;
         }
         let primes: Vec<usize> = calc_primes(10usize.pow(n as u32));
