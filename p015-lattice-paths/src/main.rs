@@ -45,13 +45,6 @@ fn main() {
         }
     }
 
-    for row in arr {
-        for elem in row {
-            print!("{:05} ", elem);
-        }
-        println!();
-    }
-
     // The problem asked for getting from the top left to the bottom right, which is exactly what (0, 0) contains.
     println!("{}", arr[0][0]);
 }
