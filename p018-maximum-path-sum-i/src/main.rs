@@ -33,13 +33,6 @@ fn main() {
             arr[i][j] = row[j];
         }
     }
-    for row in arr {
-        for elem in row {
-            print!("{:02} ", elem);
-        }
-        println!();
-    }
-    println!();
     
     /* 
     arr now is a "triangle" of numbers, the top right half is zeros, the bottom left half contains the input 1:1
@@ -61,14 +54,6 @@ fn main() {
             new_arr[i][j] = if row < LEN { arr[row][j] } else { 0 };
         }
     }
-
-    for row in new_arr {
-        for elem in row {
-            print!("{:02} ", elem);
-        }
-        println!();
-    }
-    println!();
     
     /*
     new_arr is now structured in a way that I can apply some dynamic programming to it :D
@@ -97,12 +82,6 @@ fn main() {
             arr[x][y] = new_arr[x][y] + max;
         }
     }
-    for row in arr {
-        for elem in row {
-            print!("{:04} ", elem);
-        }
-        println!();
-    }
-    println!();
+
     println!("{}", arr[LEN - 1][LEN - 1]);
 }
