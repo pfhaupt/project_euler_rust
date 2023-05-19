@@ -1,4 +1,5 @@
 fn main() {
+    // https://projecteuler.net/problem=60
     let mut old_max = 3;
     let mut max = 10_001;
     let mut primes = calc_primes(vec![2], old_max, max);
