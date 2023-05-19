@@ -35,12 +35,6 @@ fn main() {
     }
     sum -= 1; // we count the middle cell (1) twice
 
-    for row in arr {
-        for elem in row {
-            print!("{:3} ", elem);
-        }
-        println!();
-    }
     println!("{sum}");
 }
 
