@@ -9,7 +9,8 @@ struct Fraction {
 
 impl Fraction {
     fn simplify(&self) -> Fraction {
-        *self
+        let gcd = gcd(self.denominator, self.numerator);
+        Fraction { numerator: self.numerator / gcd, denominator: self.denominator / gcd }
     }
 }
 
