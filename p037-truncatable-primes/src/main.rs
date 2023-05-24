@@ -1,15 +1,19 @@
+// https://projecteuler.net/problem=37
+
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=37
     /* 
     The problem boldly claims there are only 11 primes that are truncatable from both sides. Why's that?
 
     I've spent 4 hours on this problem, my initial thought was sadly a fluke... So I just tried all primes. Well, "all".
 
     Why are there only 11 primes? Why is there no truncatable prime after 739397?
+    -> [Revisit] For a number to be left-right-truncatable, it needs to be left- and right-truncatable, respectively.
+                 You can show that both of those sets are finite. The intersection of two finite sets is also finite.
 
     Also, bottleneck is generating the primes. The rest is super fast, oh well.
+    -> [Revisit] I've noticed a few times that HashSet.contains() is very slow. For things like primality, I can just check that on the fly.
     */
     const LIMIT: u64 = 1_000_000;
     let pre_calc_primes: Vec<u64> = calc_primes(LIMIT);
