@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=71
+
 fn main() {
-    // https://projecteuler.net/problem=71
     /* 
     The idea is simple:
     Starting at 1/2, evaluate the fraction.

@@ -1,6 +1,6 @@
+// https://projecteuler.net/problem=72
+
 fn main() {
-    // https://projecteuler.net/problem=72
-    // Idea: https://en.wikipedia.org/wiki/Farey_sequence#Sequence_length_and_index_of_a_fraction
     const D: u64 = 1_000_000;
     let mut farey_values = vec![0; D as usize + 1];
     let result = farey(D, &mut farey_values) - 2;
@@ -8,6 +8,7 @@ fn main() {
 }
 
 fn farey(n: u64, already_calculated: &mut Vec<u64>) -> u64 {
+    // Idea: https://en.wikipedia.org/wiki/Farey_sequence#Sequence_length_and_index_of_a_fraction
     if n == 1 {
         already_calculated[1] = 2;
         2
