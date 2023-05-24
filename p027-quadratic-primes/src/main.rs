@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=27
+
 fn main() {
-    // https://projecteuler.net/problem=27
     const MAX: i64 = 1000;
 
     let mut record_a = 0;

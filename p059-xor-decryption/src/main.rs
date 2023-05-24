@@ -1,8 +1,9 @@
+// https://projecteuler.net/problem=59
+
 use std::fs;
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=59
     let contents = fs::read_to_string("src/cipher.txt").expect("Something went wrong when loading the file!");
     let bytes: Vec<u8> = contents.split(",").map(|s| s.parse().unwrap()).collect();
     let first_candidates: HashSet<u8> = get_key_part(&bytes, 0);

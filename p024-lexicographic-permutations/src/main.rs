@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=24
+
 use itertools::Itertools;
 
 fn main() {
-    // https://projecteuler.net/problem=24
     const NEEDED: usize = 1_000_000 - 1;
     let numbers = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     if let Some(solution) = numbers.iter().permutations(numbers.len()).nth(NEEDED) {

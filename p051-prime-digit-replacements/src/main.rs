@@ -1,11 +1,13 @@
+// https://projecteuler.net/problem=51
+
 use std::collections::HashSet;
 use std::iter::successors;
 use itertools::Itertools;
 
 const ASTERISK: &str = "*";
 const DIGIT_AS_STR: [&str; 10] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 fn main() {
-    // https://projecteuler.net/problem=51
     let mut old_max = 3;
     let mut max = 1_000_001;
     let mut primes = calc_primes(vec![2], old_max, max);

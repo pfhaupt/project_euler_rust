@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=40
+
 fn main() {
-    // https://projecteuler.net/problem=40
     const MAX: usize = 1000000;
     let mut fraction = String::from("");
     let mut number = 1;

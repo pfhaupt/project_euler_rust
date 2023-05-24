@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=70
+
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=70
     const GOAL: u64 = 10_000_000;
     let mut record_n = 0;
     let mut record_ratio = f64::MAX;

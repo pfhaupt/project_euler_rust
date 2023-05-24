@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=38
+
 fn main() {
-    // https://projecteuler.net/problem=38
     /* 
     Only need to check up to 10000, because we always "add" at least two numbers to the string.
     If number is >=10000, the string has at least 10 digits/chars, and can't ever be pandigital.

@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=73
+
 fn main() {
-    // https://projecteuler.net/problem=73
     const LIMIT: u64 = 12_000;
     const N_1: u64 = 1;
     const D_1: u64 = 3;

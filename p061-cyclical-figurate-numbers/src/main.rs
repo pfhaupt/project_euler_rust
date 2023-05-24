@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=61
+
 use itertools::Itertools;
 
 fn main() {
-    // https://projecteuler.net/problem=61
     let mut polygons: Vec<Vec<i64>> = vec![];
     for s in 3..=8 {
         let mut n = 1;

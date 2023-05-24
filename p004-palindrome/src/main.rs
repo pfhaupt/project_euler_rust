@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=4
+
 fn main() {
-    // https://projecteuler.net/problem=4
     let mut record = 0;
     for n in 100..1000 {
         for m in 100..1000 {

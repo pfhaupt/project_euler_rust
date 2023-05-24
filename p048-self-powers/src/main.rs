@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=48
+
 fn main() {
-    // https://projecteuler.net/problem=48
     const DIGIT_COUNT: u32 = 10;
     const POW10: u64 = 10u64.pow(DIGIT_COUNT);
     let mut result = 0;

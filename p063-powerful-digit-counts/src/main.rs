@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=63
+
 use std::iter::successors;
 
 fn main() {
-    // https://projecteuler.net/problem=63
     let mut n = 1;
     let mut result = 0;
     loop {

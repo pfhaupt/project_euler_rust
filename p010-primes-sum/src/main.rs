@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=10
+
 fn main() {
-    // https://projecteuler.net/problem=10
     const LIMIT: u64 = 2_000_000;
     let mut sum: u64 = 0;
     for n in 0..=LIMIT {

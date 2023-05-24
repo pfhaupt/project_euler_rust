@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=36
+
 fn main() {
-    // https://projecteuler.net/problem=36
     println!("Hello, world!");
     let palindromes: Vec<u64> = (0..1000000).into_iter().filter(|n| is_palindrome(*n, 2) && is_palindrome(*n, 10)).collect();
     let result: u64 = palindromes.into_iter().sum();

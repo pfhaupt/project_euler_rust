@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=34
+
 fn main() {
-    // https://projecteuler.net/problem=34
     /* 
     Upper bound:
     number = sum(digits!)

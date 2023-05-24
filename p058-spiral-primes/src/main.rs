@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=58
+
 fn main() {
-    // https://projecteuler.net/problem=58
     /* 
     37 36 35 34 33 32 31
     38 17 16 15 14 13 30

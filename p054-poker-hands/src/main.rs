@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=54
+
 use std::fs;
 use std::fmt::{Debug, Formatter};
 
@@ -43,7 +45,6 @@ const STRAIGHT_FLUSH: u8 = 8;
 const ROYAL_FLUSH: u8 = 9;
 
 fn main() {
-    // https://projecteuler.net/problem=54
     let contents = fs::read_to_string("src/poker.txt")
         .expect("Something went wrong when loading the file!");
     let hands: Vec<&str> = contents.split("\r\n").collect();

@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=68
+
 use itertools::Itertools;
 
 #[derive(Debug, Clone)]
@@ -83,7 +85,6 @@ impl Polygon {
 }
 
 fn main() {
-    // https://projecteuler.net/problem=68
     /* 
     Very flexible (but bruteforce-y) implementation of the problem.
     I can generate any sized polygons, and specify any goal length.

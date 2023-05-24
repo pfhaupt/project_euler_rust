@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=3
+
 fn main() {
-    // https://projecteuler.net/problem=3
     let mut n: i64 = 600851475143;
     while n != 1 {
         let mut factor = 2;

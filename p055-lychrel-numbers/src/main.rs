@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=55
+
 use num_bigint::BigUint;
 
 fn main() {
-    // https://projecteuler.net/problem=55
     const GOAL: u64 = 10000;
     let result: usize = (1..=GOAL).into_iter().filter(|n|is_lychrel(*n)).collect::<Vec<u64>>().len();
     println!("{}", result);

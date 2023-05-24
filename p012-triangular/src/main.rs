@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=12
+
 fn main() {
-    // https://projecteuler.net/problem=12
     const GOAL: i32 = 500;
     let mut n = 0;
     loop {

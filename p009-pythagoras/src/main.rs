@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=9
+
 fn main() {
-    // https://projecteuler.net/problem=9
     const MAX: u32 = 1000;
     for a in 1..=MAX {
         for b in a..=MAX {

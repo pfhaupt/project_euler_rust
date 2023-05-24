@@ -1,7 +1,10 @@
+// https://projecteuler.net/problem=67
+
 use std::fs;
 
 fn main() {
-    // https://projecteuler.net/problem=67
+    // See Problem 18 for a description of my implementation
+    
     let input = fs::read_to_string("src/triangle.txt")
     .expect("Something went wrong when loading the file!");
 

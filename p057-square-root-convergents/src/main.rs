@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=57
+
 use num_bigint::BigUint;
 
 fn main() {
-    // https://projecteuler.net/problem=57
     let mut result = 0;
     let mut numerator = BigUint::from(1u32);
     let mut denominator = BigUint::from(1u32);

@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=50
+
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=50
     const MAX: u64 = 1_000_000;
     let primes = calc_primes(vec![2], 3, MAX);
     let primes_as_set: HashSet<u64> = primes.iter().cloned().collect();

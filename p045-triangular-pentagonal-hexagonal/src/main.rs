@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=45
+
 fn main() {
-    // https://projecteuler.net/problem=45
     let mut tri_index: u64 = 1;
     let mut pen_index = 1;
     let mut hex_index = 2;

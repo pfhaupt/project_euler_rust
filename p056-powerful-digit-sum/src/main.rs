@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=56
+
 use num_bigint::BigUint;
 
 fn main() {
-    // https://projecteuler.net/problem=56
     let mut record = BigUint::from(0u32);
     for a in 1..100u32 {
         for b in 1..100u32 {

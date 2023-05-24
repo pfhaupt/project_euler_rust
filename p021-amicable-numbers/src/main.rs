@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=21
+
 fn main() {
-    // https://projecteuler.net/problem=21
     const MAX: usize = 10000;
     let mut sum = 0;
     let mut vals: [usize; MAX] = [0; MAX];

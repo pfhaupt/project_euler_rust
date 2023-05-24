@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=64
+
 fn main() {
-    // https://projecteuler.net/problem=64
     const N: usize = 10_000;
 
     let mut result = 0;

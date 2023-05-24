@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=44
+
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=44
     let mut max = 1;
     loop {
         let pentagon_numbers: HashSet<u64> = (1..=max).into_iter().map(|n| n * (3 * n - 1) / 2).collect();

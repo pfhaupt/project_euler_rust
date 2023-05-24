@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=47
+
 fn main() {
-    // https://projecteuler.net/problem=47
     const STREAK: u64 = 4;
     let mut max = 11;
     let mut primes = calc_primes(vec![2], 3, 11);

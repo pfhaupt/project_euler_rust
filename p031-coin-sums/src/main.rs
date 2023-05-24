@@ -1,3 +1,4 @@
+// https://projecteuler.net/problem=31
 
 const GOAL: u32 = 200;
 // UK
@@ -5,7 +6,6 @@ const WORTH: [u32; 8] = [1, 2, 5, 10, 20, 50, 100, 200];
 // US
 // const WORTH: [u32; 7] = [1, 5, 10, 25, 50, 100, 200];
 fn main() {
-    // https://projecteuler.net/problem=31
     let result = check_balance(WORTH.len() as i32 - 1, 0);
     println!("{}", result);
 }

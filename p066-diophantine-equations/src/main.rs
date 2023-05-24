@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=66
+
 use std::{ops, fmt};
 use num_bigint::BigInt;
 
@@ -101,7 +103,6 @@ fn gcd(mut x: u128, mut y: u128) -> u128 {
 }
 
 fn main() {
-    // https://projecteuler.net/problem=66
     /* 
     https://en.wikipedia.org/wiki/Diophantine_equation
     https://en.wikipedia.org/wiki/Pells_equation

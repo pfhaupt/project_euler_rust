@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=15
+
 // The problem asks for a 20x20 grid, but I am calculating the paths for each vertex,
 // and a 20x20 grid means 21 vertices per row/column.
 const WIDTH: usize = 21;
@@ -5,7 +7,6 @@ const HEIGHT: usize = WIDTH;
 
 
 fn main() {
-    // https://projecteuler.net/problem=15
     /*
     This solution implements a dynamic programming solution:
     Starting at the edge cases (every vertex at the bottom or right edge has exactly one possible path),

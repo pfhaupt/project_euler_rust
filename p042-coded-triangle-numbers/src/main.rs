@@ -1,8 +1,9 @@
+// https://projecteuler.net/problem=42
+
 use std::fs;
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=42
     let triangle_numbers: HashSet<usize> = (1..1000).into_iter().map(|n|n*(n+1)/2).collect();
     let contents = fs::read_to_string("src/words.txt")
         .expect("Something went wrong when loading the file!");

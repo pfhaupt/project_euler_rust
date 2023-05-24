@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=62
+
 fn main() {
-    // https://projecteuler.net/problem=62
     let mut old_len = 0;
     let mut len: usize = 10;
     // loop until we hit something

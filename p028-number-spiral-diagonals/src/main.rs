@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=28
+
 struct Agent {
     x: usize,
     y: usize
@@ -5,7 +7,6 @@ struct Agent {
 const SIZE: usize = 11;
 
 fn main() {
-    // https://projecteuler.net/problem=28
     let mut arr = vec![vec![0; SIZE]; SIZE];
     let mut agent = Agent { x: SIZE / 2, y: SIZE / 2 };
     let mut index = 1;

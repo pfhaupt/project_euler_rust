@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=53
+
 use num_bigint::BigUint;
 
 fn main() {
-    // https://projecteuler.net/problem=53
     let goal: BigUint = BigUint::from(1_000_000u32);
     let mut counter = 0;
     for n in 1..=100 {

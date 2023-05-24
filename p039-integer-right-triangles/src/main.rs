@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=39
+
 fn main() {
-    // https://projecteuler.net/problem=39
     const MAX: usize = 1000;
     let result: usize = (0..=MAX).into_iter() // generate iterator over all numbers
                             .map(|n| generate_solutions(n).len()) // calculate solutions
