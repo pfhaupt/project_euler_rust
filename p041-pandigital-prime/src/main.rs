@@ -1,6 +1,6 @@
+// https://projecteuler.net/problem=41
+
 fn main() {
-    // https://projecteuler.net/problem=41
-    println!("Hello, world!");
     let mut n: usize = 1;
     let mut biggest = 0;
     loop {
@@ -12,9 +12,6 @@ fn main() {
         let pandigital_primes: Vec<usize> = primes.into_iter().filter(|p| is_pandigital(*p, n)).collect();
         if let Some(record) = pandigital_primes.into_iter().max() { // First time ever needing Some()
             biggest = record; // because our digits always increase, we don't need max()
-            println!("{} is the current record for {}-digits", record, n);
-        } else {
-            println!("No pandigital prime for {}-digits", n);
         }
         n += 1;
     }
