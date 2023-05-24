@@ -1,5 +1,6 @@
+// https://projecteuler.net/problem=60
+
 fn main() {
-    // https://projecteuler.net/problem=60
     let mut old_max = 3;
     let mut max = 10_001;
     let mut primes = calc_primes(vec![2], old_max, max);
@@ -13,7 +14,7 @@ fn main() {
         max = 2 * max + 1;
         primes = calc_primes(primes, old_max, max);
     }
-    println!("{:?}", result[0].0.iter().sum::<u64>());
+    println!("{}", result[0].0.iter().sum::<u64>());
 }
 
 fn generate_prime_pairs(primes: &Vec<u64>, size: usize) -> Vec<(Vec<u64>, usize)> {
@@ -40,7 +41,6 @@ fn generate_prime_pairs(primes: &Vec<u64>, size: usize) -> Vec<(Vec<u64>, usize)
             }
         }
     }
-    println!("Found {} pair(s) of length {}", result.len(), size);
     result
 }
 
