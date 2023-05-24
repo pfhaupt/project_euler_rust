@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=35
+
 use std::collections::HashSet;
 
 fn main() {
-    // https://projecteuler.net/problem=35
     const MAX: u64 = 1_000_000;
     let mut primes = vec![];
     for number in 2..=MAX {
@@ -21,7 +22,6 @@ fn main() {
             }
         }
         if circular {
-            println!("{} is circular!", prime);
             result += 1;
         }
     }
