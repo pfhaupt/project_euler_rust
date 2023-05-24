@@ -1,3 +1,5 @@
+// https://projecteuler.net/problem=33
+
 use num::integer::gcd;
 use std::fmt;
 
@@ -19,7 +21,6 @@ impl fmt::Display for Fraction {
 }
 
 fn main() {
-    // https://projecteuler.net/problem=33
     let mut numerator_product = 1;
     let mut denominator_product = 1;
 
@@ -31,7 +32,6 @@ fn main() {
             let cursed = cursed.1;
             if fraction.equals(&cursed) {
                 if !trivial {
-                    println!("{} can be cursed!", fraction);
                     let gcd = gcd(numerator, denominator);
                     numerator_product *= numerator / gcd;
                     denominator_product *= denominator / gcd;
