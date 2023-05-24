@@ -1,7 +1,8 @@
+// https://projecteuler.net/problem=65
+
 use num_bigint::BigUint; // Numbers get bigger than u128
 
 fn main() {
-    // https://projecteuler.net/problem=65
     /*
     8th term -> generate_e(7)
     Using a normal Fraction struct (now deleted), I generated those values:
@@ -40,15 +41,13 @@ fn main() {
         last_n = n.clone();
     }
     n += BigUint::from(2u32) * d.clone();
-    println!("{}", n);
-    println!("{}", d);
     let mut sum = BigUint::from(0u32);
     while n != BigUint::from(0u32) {
         let digit = n.clone() % BigUint::from(10u32);
         sum += digit;
         n /= BigUint::from(10u32);
     }
-    println!("Answer: {}", sum);
+    println!("{}", sum);
 }
 
 fn generate_e(steps: usize) -> Vec<u128> {
