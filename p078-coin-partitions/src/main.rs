@@ -1,4 +1,4 @@
-// https://projecteuler.net/problem=76
+// https://projecteuler.net/problem=78
 
 #![allow(dead_code)]
 
