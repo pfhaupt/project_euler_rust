@@ -44,7 +44,6 @@ fn main() {
     while current_date.year < 2001 {
         let correct_day = is_first(&current_date);
         if correct_day && day_of_the_week == 6 {
-            println!("{:02}.{:02}.{:4} is a Sunday!", current_date.day, current_date.month, current_date.year);
             sunday_on_first += 1;
         }
         day_of_the_week = (day_of_the_week + 1) % 7;
