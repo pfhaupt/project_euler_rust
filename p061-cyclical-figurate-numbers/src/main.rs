@@ -38,7 +38,6 @@ fn main() {
                                             for &f in p[5] {
                                                 if is_cyclic(e, f) {
                                                     if is_cyclic(f, a) {
-                                                        println!("{} {} {} {} {} {}", a, b, c, d, e, f);
                                                         println!("{}", a + b + c + d + e + f);
                                                         return;
                                                     }
