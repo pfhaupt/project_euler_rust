@@ -16,7 +16,7 @@ fn main() {
             }
         }
     }
-    println!("{} <-> {}", record_n, phi(record_n));
+    println!("{}", record_n);
 }
 
 fn phi(n: u64) -> u64 {
