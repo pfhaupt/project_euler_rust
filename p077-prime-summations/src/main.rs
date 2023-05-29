@@ -42,7 +42,6 @@ fn count_ways(goal: i64, acc: i64, primes: &Vec<i64>, start_index: usize) -> i64
 }
 
 fn calc_primes(old_primes: Vec<i64>, mut from: i64, limit: i64) -> Vec<i64> {
-    print!("Calculating primes between {} and {}... ", from, limit);
     if from % 2 == 0 {
         from += 1;
     }
@@ -62,6 +61,5 @@ fn calc_primes(old_primes: Vec<i64>, mut from: i64, limit: i64) -> Vec<i64> {
             primes.push(number);
         }
     }
-    println!("Done!");
     primes
 }
