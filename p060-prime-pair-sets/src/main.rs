@@ -74,7 +74,6 @@ fn get_concatenation(left_side: u64, right_side: u64) -> u64 {
 
 
 fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
-    print!("Calculating primes between {} and {}... ", from, limit);
     if from % 2 == 0 {
         from += 1;
     }
@@ -94,7 +93,6 @@ fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
             primes.push(number);
         }
     }
-    println!("Done!");
     primes
 }
 
