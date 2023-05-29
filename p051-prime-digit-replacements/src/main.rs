@@ -38,8 +38,6 @@ fn main() {
                         panic!("{} could not be parsed.", replacement);
                     }
                     if counter == GOAL {
-                        println!("Found a prime with a family of {}", GOAL);
-                        println!("Family: {:#?}", family);
                         println!("{}", family.iter().min().unwrap());
                         return;
                     }
@@ -85,7 +83,6 @@ fn is_prime(candidate: u64, primes: &HashSet<u64>) -> bool {
 }
 
 fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
-    print!("Calculating primes between {} and {}... ", from, limit);
     if from % 2 == 0 {
         from += 1;
     }
@@ -105,6 +102,5 @@ fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
             primes.push(number);
         }
     }
-    println!("Done!");
     primes
 }
