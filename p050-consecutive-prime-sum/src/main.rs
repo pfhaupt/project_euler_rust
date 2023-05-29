@@ -29,7 +29,7 @@ fn main() {
     for i in 0..record_length {
         result += primes[start + i];
     }
-    println!("{} {} {}", start, record_length, result);
+    println!("{}", result);
 }
 
 fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
