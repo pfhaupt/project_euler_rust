@@ -99,16 +99,13 @@ fn main() {
     const TARGET_LEN: usize = 16;
     let mut p = Polygon::create(SIZE);
     let mut result = 0;
-    // There's no basis for the 10..30 range, it just feels right
-    for sum in 10..30 {
-        let s = get_solutions(&mut p, sum);
-        for poly in &s {
-            let poly_as_string = poly.generate_string();
-            if poly_as_string.len() == TARGET_LEN {
-                let n: u64 = poly_as_string.parse().unwrap();
-                if n > result {
-                    result = n;
-                }
+    let s = get_all_solutions(&mut p);
+    for poly in &s {
+        let poly_as_string = poly.generate_string();
+        if poly_as_string.len() == TARGET_LEN {
+            let n: u64 = poly_as_string.parse().unwrap();
+            if n > result {
+                result = n;
             }
         }
     }
@@ -131,7 +128,7 @@ fn count_unique_solutions(polygon: &mut Polygon, goal: u64) -> u64 {
     result / polygon.get_line_count() as u64
 }
 
-fn get_solutions(polygon: &mut Polygon, goal: u64) -> Vec<Polygon> {
+fn get_all_solutions(polygon: &mut Polygon) -> Vec<Polygon> {
     let mut result = vec![];
     let size = polygon.get_point_count();
     let mut permutations = (0..size).into_iter().permutations(size);
@@ -139,8 +136,11 @@ fn get_solutions(polygon: &mut Polygon, goal: u64) -> Vec<Polygon> {
         for i in 0..size {
             polygon.set_point(i, perm[i] as u64 + 1);
         }
-        if polygon.is_valid(goal) {
-            result.push(polygon.clone());
+        // There's no basis for the 10..30 range, it just feels right
+        for sum in 10..30 {
+            if polygon.is_valid(sum) {
+                result.push(polygon.clone());
+            }
         }
     }
     if result.len() == 0 {
