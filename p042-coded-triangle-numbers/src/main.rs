@@ -5,7 +5,7 @@ use std::collections::HashSet;
 
 fn main() {
     let triangle_numbers: HashSet<usize> = (1..1000).into_iter().map(|n|n*(n+1)/2).collect();
-    let contents = fs::read_to_string("src/words.txt")
+    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p042-coded-triangle-numbers/src/words.txt")
         .expect("Something went wrong when loading the file!");
     let names: Vec<&str> = contents.split(",").collect();
 

@@ -4,7 +4,7 @@ use std::fs;
 use std::collections::HashSet;
 
 fn main() {
-    let contents = fs::read_to_string("src/cipher.txt").expect("Something went wrong when loading the file!");
+    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p059-xor-decryption/src/cipher.txt").expect("Something went wrong when loading the file!");
     let bytes: Vec<u8> = contents.split(",").map(|s| s.parse().unwrap()).collect();
     let first_candidates: HashSet<u8> = get_key_part(&bytes, 0);
     let second_candidates: HashSet<u8> = get_key_part(&bytes, 1);

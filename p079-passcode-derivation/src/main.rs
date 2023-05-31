@@ -77,7 +77,7 @@ fn main() {
     At each step (each new passcode), insert any numbers into the list if they're not in there already
     Sort the list based on all orders
      */
-    let contents = fs::read_to_string("src/keylog.txt")
+    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p079-passcode-derivation/src/keylog.txt")
         .expect("Something went wrong when loading the file!");
     let passcodes: Vec<u64> = contents.split("\r\n").map(|s|s.parse().unwrap()).collect();
     let mut code_guess = vec![];

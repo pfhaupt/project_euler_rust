@@ -5,7 +5,7 @@ use std::fs;
 fn main() {
     // See Problem 18 for a description of my implementation
     
-    let input = fs::read_to_string("src/triangle.txt")
+    let input = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p067-maximum-path-sum-ii/src/triangle.txt")
     .expect("Something went wrong when loading the file!");
 
     let mut number_vec: Vec<Vec<u64>> = vec![];

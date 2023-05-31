@@ -45,7 +45,7 @@ const STRAIGHT_FLUSH: u8 = 8;
 const ROYAL_FLUSH: u8 = 9;
 
 fn main() {
-    let contents = fs::read_to_string("src/poker.txt")
+    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p054-poker-hands/src/poker.txt")
         .expect("Something went wrong when loading the file!");
     let hands: Vec<&str> = contents.split("\r\n").collect();
     let mut rounds: Vec<Vec<&str>> = vec![];
