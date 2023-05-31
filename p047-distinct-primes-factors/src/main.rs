@@ -51,6 +51,9 @@ fn calc_primes(old_primes: Vec<u64>, from: u64, limit: u64) -> Vec<u64> {
 fn get_unique_prime_factors(number: u64, primes: &Vec<u64>) -> Vec<u64> {
     let mut result = vec![];
     for p in primes {
+        if p > &number {
+            break;
+        }
         if number % p == 0 {
             result.push(*p);
         }
