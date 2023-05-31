@@ -19,6 +19,9 @@ fn main() {
     48 seconds in release mode to get the solution - The rule is happy.
     Modulo magic reduced the time down to 9 seconds in release - I do not need to use BigInt anymore!
     70 seconds without release.. I think I'll have to take it.
+    [Revisit] I have found a very obvious optimization in p3:
+              If I know that n - k_i is already lower than zero, I don't need to check n - k_(i+1), n - k_(i+2) etc.
+              This brings the time down to 0.79 seconds without release mode. Nice.
      */
     let size = 100_000;
     // let pre_computed_p = vec![BigInt::from(0); size];
@@ -50,11 +53,25 @@ fn p3(n: i64, pre_computed_p: &mut Vec<i64>) -> i64 {
     let mut sum = 0;
     let mut minus_one_flip = 1;
     for k in 1..=n {
-        let summand = minus_one_flip * (p3(n - k * (3 * k - 1) / 2, pre_computed_p) + p3(n - k * (3 * k + 1) / 2, pre_computed_p));
-        sum = sum + summand;
+        let mut left_side_valid = true;
+        let mut right_side_valid = true;
+        let mut summand = 0;
+        let left_k = k * (3 * k - 1) / 2;
+        summand += p3(n - left_k, pre_computed_p);
+        if left_k >= n {
+            left_side_valid = false;
+        }
+        let right_k = k * (3 * k + 1) / 2;
+        summand += p3(n - right_k, pre_computed_p);
+        if right_k >= n {
+            right_side_valid = false;
+        }
+        sum += minus_one_flip * summand;
         sum %= 1_000_000;
-        if sum < 0 { sum += 1_000_000; }
         minus_one_flip *= -1;
+        if !left_side_valid && !right_side_valid {
+            break;
+        }
     }
     pre_computed_p[n as usize] = sum;
     sum
