@@ -18,25 +18,27 @@ fn main() {
         }
         matrix.push(row);
     }
-    let mut result = u64::MAX;
+    let mut start =vec![];
     for i in 0..matrix.len() {
-        let slot = dijkstra(&matrix, (i, 0));
-        if slot < result {
-            result = slot;
-        }
+        start.push((i, 0usize));
     }
+    let result = dijkstra(&matrix, &start);
     println!("{}", result);
 }
 
-fn dijkstra(matrix: &Vec<Vec<u64>>, start: (usize, usize)) -> u64 {
+fn dijkstra(matrix: &Vec<Vec<u64>>, start: &Vec<(usize, usize)>) -> u64 {
     let mut dist = vec![vec![u64::MAX; matrix.len()]; matrix.len()];
+    let mut visited = vec![vec![false; matrix.len()]; matrix.len()];
     let mut queue = vec![];
     for x in 0..matrix.len() {
         for y in 0..matrix.len() {
             queue.push((x, y));
         }
     }
-    dist[start.0][start.1] = matrix[start.0][start.1];
+    for start in start {
+        dist[start.0][start.1] = matrix[start.0][start.1];
+        visited[start.0][start.1] = true;
+    }
     while !queue.is_empty() {
         let closest = get_closest(&queue, &dist);
         if closest.1.1 == matrix.len() - 1 {
@@ -44,9 +46,13 @@ fn dijkstra(matrix: &Vec<Vec<u64>>, start: (usize, usize)) -> u64 {
         }
         queue.remove(closest.0);
         for neighbor in get_neighbors(&closest.1, matrix.len()) {
+            if visited[neighbor.0][neighbor.1] {
+                continue;
+            }
             let alt = dist[closest.1.0][closest.1.1] + (matrix[neighbor.0][neighbor.1]);
             if alt < dist[neighbor.0][neighbor.1] {
                 dist[neighbor.0][neighbor.1] = alt;
+                visited[neighbor.0][neighbor.1] = true;
             }
         }
     }
