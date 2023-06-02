@@ -14,23 +14,7 @@
     |/                    |/
     S---------------------X
                 a
-        X--------------------X
-        |                    |
-        |                    |
-        |                    |
-        X--------------------F
-        |                    |
-        C                    |c
-        |                    |
-    X---X------------A-------X----X
-    |   |                    |    |
-    |   |                    Bb   |
-    |   |                    |    |
-    X---S--------------------X----X
-        |         a          |
-        |                    D
-        |                    |
-        X--------------------X
+    
     There are many routes from S to F (infinitely many, even), but we only care about shortest routes.
     There are 3 such routes for any given cube of size a*b*c, according to the Problem description.
     Why 3? We only care about "travelling on the surfaces of the room" -> Each cube has 6 sides, and ignoring symmetry (e.g. SD->DF == SB->BF) we get 3 unique candidates.
