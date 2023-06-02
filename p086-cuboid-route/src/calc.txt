@@ -1,0 +1,205 @@
+    z y
+    |/
+    +-x
+        X---------------------F
+       /|                    /|
+      D |                   / |
+     /  C                  /  |
+    X---|-----------------X   | c
+    |   |                 |   |
+    |   |                 |   |
+    |   X-------------A---|---X
+    |  /                  |  /
+    | /                   | B b
+    |/                    |/
+    S---------------------X
+                a
+        X--------------------X
+        |                    |
+        |                    |
+        |                    |
+        X--------------------F
+        |                    |
+        C                    |c
+        |                    |
+    X---X------------A-------X----X
+    |   |                    |    |
+    |   |                    Bb   |
+    |   |                    |    |
+    X---S--------------------X----X
+        |         a          |
+        |                    D
+        |                    |
+        X--------------------X
+    There are many routes from S to F (infinitely many, even), but we only care about shortest routes.
+    There are 3 such routes for any given cube of size a*b*c, according to the Problem description.
+    Why 3? We only care about "travelling on the surfaces of the room" -> Each cube has 6 sides, and ignoring symmetry (e.g. SD->DF == SB->BF) we get 3 unique candidates.
+    Those are:
+    SA->AF
+    SB->BF
+    SC->CF
+    The mission lies in finding the optimal points A, B, C.
+    For all further calculations, we simplify stuff by assuming S = (0, 0, 0) and F = (a, b, c)
+
+    SAF:
+    z y
+    |/
+    +-x
+        X---------------------F
+       /|                    /|
+      / |                   / |
+     /  |                  /  |
+    X---|-----------------X   | c
+    |   |                 |   |
+    |   |                 |   |
+    |   X-------------A---|---X
+    |  /                  |  /
+    | /                   | / b
+    |/                    |/
+    S---------------------X
+                a
+    A is fixed in a sense that it always lies on a line.
+    SA: We can define its coordinates as A(x, b, 0) where 0<=x<=a
+        Then it follows that dist(S, A) = sqrt(x * x + b * b)
+    AF: dx = A.x - F.x = x - a = x - a
+        dy = A.y - F.y = b - b = 0
+        dz = A.z - F.z = 0 - c = -c
+        dist(A, F) = sqrt(dx * dx + dy * dy + dz * dz) = sqrt((x - a) * (x - a) + c * c)
+    dist(S, F) = dist(S, A) + dist(A, F) = sqrt(x * x + b * b) + sqrt((x - a) * (x - a) + c * c)
+    We want to minimize dist(S, F) => We need to find the correct x that minimizes dist(S, F)
+    Using WolframAlpha and desmos: https://www.desmos.com/calculator/sbtrbhb9ai
+    x1 = (a * b) / (b - c) or 
+    x2 = (a * b) / (b + c)
+    x1 >= 0 -> (a * b) / (b - c) >= 0 -> a*b > 0 && (b - c) > 0 -> b > c
+    x2 >= 0 -> (a * b) / (b + c) >= 0 -> a*b > 0 ** (b + c) > 0, always
+    x1 <= a -> (a * b) / (b - c) <= a
+        -> Case 1: (b - c) < 0 -> x1 always smaller than a, but then also smaller than 0 -> not possible
+        -> Case 2: (b - c) > 0 -> a * b <= a * (b - c) -> a * b <= a * b - a * c -> 0 <= -a * c -> a and c always > 0, so not possible
+    x2 <= a -> (a * b) / (b + c) <= a -> a * b <= a * (b + c) -> a * b <= a * b + a * c -> 0 <= a * c -> always
+    dist(S, A, F) is minimized when x = x2 = (a * b) / (b + c)
+
+    SBF:
+    z y
+    |/
+    +-x
+        X---------------------F
+       /|                    /|
+      / |                   / |
+     /  |                  /  |
+    X---|-----------------X   | c
+    |   |                 |   |
+    |   |                 |   |
+    |   X-----------------|---X
+    |  /                  |  /
+    | /                   | B b
+    |/                    |/
+    S---------------------X
+                a
+    B is fixed in a sense that it always lies on a line.
+    SB: We can define its coordinates as B(a, y, 0) where 0<=y<=b
+        Then it follows that dist(S, B) = sqrt(a * a + y * y)
+    BF: dx = B.x - F.x = a - a = 0
+        dy = B.y - F.y = y - b = y - b
+        dz = B.z - F.z = 0 - c = -c
+        dist(B, F) = sqrt(dx * dx + dy * dy + dz * dz) = sqrt((y - b) * (y - b) + c * c)
+    dist(S, F) = dist(S, B) + dist(B, F) = sqrt(a * a + y * y) + sqrt((y - b) * (y - b) + c * c)
+    Doing the same WolframAlpha/Desmos game: https://www.desmos.com/calculator/2nfakbvbyi
+    We get dist(S, B, F) is minimized when
+    y1 = (a * b) / (a - c) or
+    y2 = (a * b) / (a + c)
+    For the same reasons as above, only y2 is valid
+    dist(S, B, F) is minimized when y = y2 = (a * b) / (a + c)
+
+    SCF:
+    z y
+    |/
+    +-x
+        X---------------------F
+       /|                    /|
+      / |                   / |
+     /  C                  /  |
+    X---|-----------------X   | c
+    |   |                 |   |
+    |   |                 |   |
+    |   X-----------------|---X
+    |  /                  |  /
+    | /                   | / b
+    |/                    |/
+    S---------------------X
+                a
+    C is fixed in a sense that it always lies on a line.
+    SC: We can define its coordinates as C(0, b, z) where 0<=z<=c
+        Then it follows that dist(S, C) = sqrt(b * b + z * z)
+    CF: dx = C.x - F.x = 0 - a = -a
+        dy = C.y - F.y = b - b = 0
+        dz = C.z - F.z = z - c = z - c
+        dist(C, F) = sqrt(dx * dx + dy * dy + dz * dz) = sqrt(a * a + (z - c) * (z - c))
+    dist(S, F) = dist(S, C) + dist(C, F) = sqrt(b * b + z * z) + sqrt(a * a + (z - c) * (z - c))
+    Again, WolframAlpha and Desmos are our heroes: https://www.desmos.com/calculator/kksngfw171
+    z1 = (b * c) / (a - b)
+    z2 = (b * c) / (a + b)
+    For the same reasons as above, only z2 is valid
+    dist(S, C, F) is minimized when z = z2 = (b * c) / (a + b)
+    
+    To summarize:
+    d1 = dist(S, A, F) = dist(S, A) + dist(A, F) = sqrt(x * x + b * b) + sqrt((x - a) * (x - a) + c * c)
+    dist(S, A, F) is minimized when x = (a * b) / (b + c)
+    d2 = dist(S, B, F) = dist(S, B) + dist(B, F) = sqrt(a * a + y * y) + sqrt((y - b) * (y - b) + c * c)
+    dist(S, B, F) is minimized when y = (a * b) / (a + c)
+    d3 = dist(S, C, F) = dist(S, C) + dist(C, F) = sqrt(b * b + z * z) + sqrt(a * a + (z - c) * (z - c))
+    dist(S, C, F) is minimized when z = (b * c) / (a + b)
+
+    -> Calculate d1 to d3
+    -> if isInt(min(d1, d2, d3)) -> counter++
+
+Code:
+fn main() {
+    const GOAL: usize = 2_000;
+    let mut m = 1u64;
+    let mut distinct: Vec<(u64, u64, u64)> = vec![];
+    loop {
+        let a = m;
+        for b in 1..=m {
+            for c in 1..=m {
+                let a = a as f64;
+                let b = b as f64;
+                let c = c as f64;
+                let d1 = dist_saf(a, b, c);
+                let d2 = dist_sbf(a, b, c);
+                let d3 = dist_scf(a, b, c);
+                let a = a as u64;
+                let b = b as u64;
+                let c = c as u64;
+                let d = f64::min(d1, f64::min(d2, d3));
+                if d.fract() == 0.0 {
+                    let min = u64::min(a, u64::min(b, c));
+                    let max = u64::max(a, u64::max(b, c));
+                    let cuboid = (min, a + b + c - min - max, max);
+                    if !distinct.contains(&cuboid) {
+                        distinct.push(cuboid);
+                    }
+                }
+            }
+        }
+        println!("{:3} {}", m, distinct.len());
+        if distinct.len() > GOAL {
+            break;
+        }
+        m += 1;
+    }
+}
+
+fn dist_saf(a: f64, b: f64, c: f64) -> f64 {
+    let x = (a * b) / (b + c);
+    f64::sqrt(x * x + b * b) + f64::sqrt((x - a) * (x - a) + c * c)
+}
+
+fn dist_sbf(a: f64, b: f64, c: f64) -> f64 {
+    let y = (a * b) / (a + c);
+    f64::sqrt(a * a + y * y) + f64::sqrt((y - b) * (y - b) + c * c)
+}
+
+fn dist_scf(a: f64, b: f64, c: f64) -> f64 {
+    let z = (b * c) / (a + b);
+    f64::sqrt(b * b + z * z) + f64::sqrt(a * a + (z - c) * (z - c))
+}
