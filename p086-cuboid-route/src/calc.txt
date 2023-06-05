@@ -55,7 +55,7 @@
     x1 = (a * b) / (b - c) or 
     x2 = (a * b) / (b + c)
     x1 >= 0 -> (a * b) / (b - c) >= 0 -> a*b > 0 && (b - c) > 0 -> b > c
-    x2 >= 0 -> (a * b) / (b + c) >= 0 -> a*b > 0 ** (b + c) > 0, always
+    x2 >= 0 -> (a * b) / (b + c) >= 0 -> a*b > 0 && (b + c) > 0, always
     x1 <= a -> (a * b) / (b - c) <= a
         -> Case 1: (b - c) < 0 -> x1 always smaller than a, but then also smaller than 0 -> not possible
         -> Case 2: (b - c) > 0 -> a * b <= a * (b - c) -> a * b <= a * b - a * c -> 0 <= -a * c -> a and c always > 0, so not possible
