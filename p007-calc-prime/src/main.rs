@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=7
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut prime_counter = 0;
     let mut n = 2;
     loop {
@@ -9,10 +12,8 @@ fn main() {
         }
         if prime_counter == 10001 {
             println!("{}", n);
-            break;
-        }
-        if n < 0 {
-            break;
+            println!("{:?}", now.elapsed());
+            return;
         }
         n += 1;
     }

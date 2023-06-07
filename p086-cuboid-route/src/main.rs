@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=86
 
+use std::time::Instant;
+
 fn main() {
     /* 
     I've spent the last few hours figuring out some formulas (see calc.txt for more details), but I must've missed something.
@@ -45,6 +47,7 @@ fn main() {
     SF = sqrt(a * a + (b + c) * (b + c))
     check if SF is an integer, done.
      */
+    let now = Instant::now();
 
     const GOAL: usize = 1_000_000;
     let mut m = 1;
@@ -59,9 +62,10 @@ fn main() {
             }
         }
         if solutions > GOAL {
-            println!("{}", m);
             break;
         }
         m += 1;
     }
+    println!("{}", m);
+    println!("{:?}", now.elapsed());
 }

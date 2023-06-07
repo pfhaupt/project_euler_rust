@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=35
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     const MAX: u64 = 1_000_000;
     let mut primes = vec![];
     for number in 2..=MAX {
@@ -26,6 +29,7 @@ fn main() {
         }
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_prime(number: u64, primes: &Vec<u64>) -> bool {

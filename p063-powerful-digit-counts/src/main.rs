@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=63
 
 use std::iter::successors;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut n = 1;
     let mut result = 0;
     loop {
@@ -21,4 +24,5 @@ fn main() {
         n += 1;
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }

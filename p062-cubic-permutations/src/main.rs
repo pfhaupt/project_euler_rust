@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=62
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut old_len = 0;
     let mut len: usize = 10;
     // loop until we hit something
@@ -23,6 +26,7 @@ fn main() {
                                         if is_permutation(d, e) {
                                             //println!("{} {} {} {} {}", a, b, c, d, e);
                                             println!("{}", a);
+                                            println!("{:?}", now.elapsed());
                                             return;
                                         }
                                     }

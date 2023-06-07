@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=23
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: usize = 100;
 
     let mut abundant: Vec<usize> = vec![];
@@ -35,6 +38,7 @@ fn main() {
     //let solution: usize = hit.iter().enumerate().map(|(i, v)| (!(v) as usize) * i).sum();
 
     println!("{:?}", solution);
+    println!("{:?}", now.elapsed());
 }
 
 fn d(n: usize) -> usize {

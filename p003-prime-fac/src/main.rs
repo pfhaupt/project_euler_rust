@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=3
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut n: i64 = 600851475143;
     let mut biggest_factor = 0;
     while n != 1 {
@@ -12,4 +15,5 @@ fn main() {
         biggest_factor = biggest_factor.max(factor);
     }
     println!("{}", biggest_factor);
+    println!("{:?}", now.elapsed());
 }

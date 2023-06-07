@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=69
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const GOAL: usize = 1_000_000;
     let phi = calculate_phi(GOAL);
     let mut record_n = 0;
@@ -14,6 +17,7 @@ fn main() {
         }
     }
     println!("{}", record_n);
+    println!("{:?}", now.elapsed());
 }
 
 fn calculate_phi(limit: usize) -> Vec<usize> {

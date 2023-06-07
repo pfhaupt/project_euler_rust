@@ -2,6 +2,8 @@
 
 use num::integer::gcd;
 use std::fmt;
+use std::time::Instant;
+
 
 #[derive(Debug)]
 struct Fraction {
@@ -21,6 +23,7 @@ impl fmt::Display for Fraction {
 }
 
 fn main() {
+    let now = Instant::now();
     let mut numerator_product = 1;
     let mut denominator_product = 1;
 
@@ -40,6 +43,7 @@ fn main() {
         }
     }
     println!("{}", denominator_product / gcd(numerator_product, denominator_product));
+    println!("{:?}", now.elapsed());
 }
 
 fn simplify_incorrect(fraction: &Fraction) -> (bool, Fraction) {

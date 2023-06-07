@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=10
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const LIMIT: u64 = 2_000_000;
     let mut sum: u64 = 0;
     for n in 0..=LIMIT {
@@ -9,6 +12,7 @@ fn main() {
         }
     }
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_prime(n: u64) -> bool {

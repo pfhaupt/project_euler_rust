@@ -1,11 +1,15 @@
 // https://projecteuler.net/problem=55
 
 use num_bigint::BigUint;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     const GOAL: u64 = 10000;
     let result: usize = (1..=GOAL).into_iter().filter(|n|is_lychrel(*n)).collect::<Vec<u64>>().len();
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_lychrel(number: u64) -> bool {

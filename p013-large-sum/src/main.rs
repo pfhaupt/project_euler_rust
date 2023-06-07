@@ -1,8 +1,10 @@
 // https://projecteuler.net/problem=13
 
 use num_bigint::BigUint;
+use std::time::Instant;
 
 fn main() {
+    let now = Instant::now();
     let nums = ["37107287533902102798797998220837590246510135740250",
     "46376937677490009712648124896970078050417018260538",
     "74324986199524741059474233309513058123726617309629",
@@ -109,6 +111,7 @@ fn main() {
         sum = sum + num;
     }
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn parse_string(original: &str) -> BigUint {

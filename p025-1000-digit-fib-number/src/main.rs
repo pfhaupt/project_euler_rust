@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=25
 
 use num_bigint::BigUint;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     const GOAL: usize = 1000;
     let mut a = BigUint::from(0u32);
     let mut b = BigUint::from(1u32);
@@ -17,4 +20,5 @@ fn main() {
         index += 1;
     }
     println!("{}", index);
+    println!("{:?}", now.elapsed());
 }

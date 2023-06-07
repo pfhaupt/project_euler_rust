@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=71
 
+use std::time::Instant;
+
 fn main() {
     /* 
     The idea is simple:
@@ -11,6 +13,7 @@ fn main() {
     
     From messing around a bit, decreasing the numerator is not necessary, but that'd mean I have to subtract one from my end result.
      */
+    let now = Instant::now();
     const LIMIT: u64 = 1_000_000;
     const GOAL: f64 = 3.0 / 7.0;
     let mut d = 2;
@@ -25,4 +28,5 @@ fn main() {
         }
     }
     println!("{}", n);
+    println!("{:?}", now.elapsed());
 }

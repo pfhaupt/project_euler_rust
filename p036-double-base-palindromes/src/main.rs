@@ -1,9 +1,13 @@
 // https://projecteuler.net/problem=36
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let palindromes: Vec<u64> = (0..1000000).into_iter().filter(|n| is_palindrome(*n, 2) && is_palindrome(*n, 10)).collect();
     let result: u64 = palindromes.into_iter().sum();
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_palindrome(number: u64, base: u64) -> bool {

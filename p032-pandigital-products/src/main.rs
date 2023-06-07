@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=32
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
     /* 
@@ -8,6 +10,7 @@ fn main() {
     If it were a 3-digit number, both multiplicand and multiplier would have to be 3-digit too to be pandigital
     If it were a 5-digit number, multiplicand and multiplier could be at most 3/1 or 2/2 digits, which both does not result in a product of 5 digits
      */
+    let now = Instant::now();
     let mut pandigital_numbers: HashSet<usize> = HashSet::new();
     for number in 1000..10000 {
         let factors = factorize(number);
@@ -19,6 +22,7 @@ fn main() {
         }
     }
     println!("{}", pandigital_numbers.iter().sum::<usize>());
+    println!("{:?}", now.elapsed());
 }
 
 fn factorize(number: usize) -> Vec<usize> {

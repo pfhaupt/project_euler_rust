@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=79
 
 use std::fs;
+use std::time::Instant;
+
 
 #[derive(PartialEq, Clone)]
 struct Order {
@@ -77,6 +79,7 @@ fn main() {
     At each step (each new passcode), insert any numbers into the list if they're not in there already
     Sort the list based on all orders
      */
+    let now = Instant::now();
     let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p079-passcode-derivation/src/keylog.txt")
         .expect("Something went wrong when loading the file!");
     let passcodes: Vec<u64> = contents.split("\r\n").map(|s|s.parse().unwrap()).collect();
@@ -103,4 +106,5 @@ fn main() {
     }
     let result = code_guess.iter().map(|d| d.to_string()).collect::<Vec<String>>().join("");
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }

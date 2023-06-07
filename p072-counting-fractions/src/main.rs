@@ -1,10 +1,14 @@
 // https://projecteuler.net/problem=72
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const D: u64 = 1_000_000;
     let mut farey_values = vec![0; D as usize + 1];
     let result = farey(D, &mut farey_values) - 2;
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn farey(n: u64, already_calculated: &mut Vec<u64>) -> u64 {

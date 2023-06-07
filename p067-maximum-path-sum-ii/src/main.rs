@@ -1,9 +1,12 @@
 // https://projecteuler.net/problem=67
 
 use std::fs;
+use std::time::Instant;
+
 
 fn main() {
     // See Problem 18 for a description of my implementation
+    let now = Instant::now();
     
     let input = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p067-maximum-path-sum-ii/src/triangle.txt")
     .expect("Something went wrong when loading the file!");
@@ -48,4 +51,5 @@ fn main() {
     }
 
     println!("{}", arr[LEN - 1][LEN - 1]);
+    println!("{:?}", now.elapsed());
 }

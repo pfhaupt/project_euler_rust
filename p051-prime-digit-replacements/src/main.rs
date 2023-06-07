@@ -3,11 +3,14 @@
 use std::collections::HashSet;
 use std::iter::successors;
 use itertools::Itertools;
+use std::time::Instant;
+
 
 const ASTERISK: &str = "*";
 const DIGIT_AS_STR: [&str; 10] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 fn main() {
+    let now = Instant::now();
     let mut old_max = 3;
     let mut max = 1_000_001;
     let mut primes = calc_primes(vec![2], old_max, max);
@@ -39,6 +42,7 @@ fn main() {
                     }
                     if counter == GOAL {
                         println!("{}", family.iter().min().unwrap());
+                        println!("{:?}", now.elapsed());
                         return;
                     }
                 }

@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=40
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: usize = 1000000;
     let mut fraction = String::from("");
     let mut number = 1;
@@ -16,4 +19,5 @@ fn main() {
         index *= 10;
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }

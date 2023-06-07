@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=34
 
+use std::time::Instant;
+
 fn main() {
     /* 
     Upper bound:
@@ -12,6 +14,7 @@ fn main() {
     we solve for digit_count (we ask wolframalpha), and get digit_count = 6.3634..
     -> Upper bound is 7 digits, after that the number outgrows the sum
      */
+    let now = Instant::now();
     const DIGITS: u32 = 7;
     const MAX: u64 = 10u64.pow(DIGITS);
     
@@ -26,6 +29,7 @@ fn main() {
     let sum: u64 = (3..=MAX).filter(|n| *n == get_sum(*n)).sum();
 
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn get_sum(number: u64) -> u64 {

@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=52
 
 use std::iter::successors;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut number = 1;
     loop {
         let mut valid = true;
@@ -19,6 +22,7 @@ fn main() {
         number += 1;
     }
     println!("{}", number);
+    println!("{:?}", now.elapsed());
 }
 
 fn same_digits(mut number1: u64, mut number2: u64) -> bool {

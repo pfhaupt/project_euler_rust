@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=41
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut n: usize = 1;
     let mut biggest = 0;
     loop {
@@ -16,6 +19,7 @@ fn main() {
         n += 1;
     }
     println!("{}", biggest);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_pandigital(number: usize, n: usize) -> bool {

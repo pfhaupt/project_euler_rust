@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=65
 
 use num_bigint::BigUint; // Numbers get bigger than u128
+use std::time::Instant;
+
 
 fn main() {
     /*
@@ -28,6 +30,7 @@ fn main() {
     n_3 = d_4 = 9
     etc.
      */
+    let now = Instant::now();
     // GOAL is 99 because I don't count the 2 as part of the sequence
     const GOAL: usize = 99;
     let period = generate_e(GOAL);
@@ -48,6 +51,7 @@ fn main() {
         n /= BigUint::from(10u32);
     }
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn generate_e(steps: usize) -> Vec<u128> {

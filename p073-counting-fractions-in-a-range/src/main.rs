@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=73
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const LIMIT: u64 = 12_000;
     const N_1: u64 = 1;
     const D_1: u64 = 3;
@@ -10,6 +13,7 @@ fn main() {
     result -= count_farey(N_1, D_1, N_2, D_2, LIMIT);       // how many fractions are between N_1/D_1 and N_2/D_2?
     result -= 1;                                            // we don't want to count N_2/D_2
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn count_farey(mut n_1: u64, mut d_1: u64, mut n_2: u64, mut d_2: u64, limit: u64) -> u64 {

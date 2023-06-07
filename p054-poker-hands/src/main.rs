@@ -2,6 +2,8 @@
 
 use std::fs;
 use std::fmt::{Debug, Formatter};
+use std::time::Instant;
+
 
 #[derive(Clone)]
 struct Card {
@@ -45,6 +47,7 @@ const STRAIGHT_FLUSH: u8 = 8;
 const ROYAL_FLUSH: u8 = 9;
 
 fn main() {
+    let now = Instant::now();
     let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p054-poker-hands/src/poker.txt")
         .expect("Something went wrong when loading the file!");
     let hands: Vec<&str> = contents.split("\r\n").collect();
@@ -75,6 +78,7 @@ fn main() {
         }
     }
     println!("{}", player_one_wins);
+    println!("{:?}", now.elapsed());
 }
 
 fn evaluate(player_one: &Hand, player_two: &Hand) -> u8 {

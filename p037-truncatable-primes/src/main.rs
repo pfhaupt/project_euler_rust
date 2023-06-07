@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=37
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
     /* 
@@ -15,6 +17,7 @@ fn main() {
     Also, bottleneck is generating the primes. The rest is super fast, oh well.
     -> [Revisit] I've noticed a few times that HashSet.contains() is very slow. For things like primality, I can just check that on the fly.
     */
+    let now = Instant::now();
     const LIMIT: u64 = 1_000_000;
     let pre_calc_primes: Vec<u64> = calc_primes(LIMIT);
     //println!("Calculated primes!");
@@ -22,6 +25,7 @@ fn main() {
     //println!("Created prime set!");
     let result: u64 = pre_calc_primes.into_iter().filter(|p|truncatable(*p, &primes_as_set)).sum();
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn calc_primes(limit: u64) -> Vec<u64> {

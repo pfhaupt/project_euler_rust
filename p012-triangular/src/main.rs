@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=12
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const GOAL: i32 = 500;
     let mut n = 0;
     loop {
@@ -14,6 +17,7 @@ fn main() {
         }
         if factors >= GOAL {
             println!("{}", triangle);
+            println!("{:?}", now.elapsed());
             break;
         }
         n += 1;

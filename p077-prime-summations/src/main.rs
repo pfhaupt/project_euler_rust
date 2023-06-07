@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=77
 
+use std::time::Instant;
+
 const GOAL: i64 = 5_000;
 
 fn main() {
+    let now = Instant::now();
     let mut old_max = 3;
     let mut max = 11;
     let mut primes = calc_primes(vec![2], old_max, max);
@@ -11,6 +14,7 @@ fn main() {
             let count = count_ways(number, 0, &primes, 0);
             if count >= GOAL {
                 println!("{}", number);
+                println!("{:?}", now.elapsed());
                 return;
             }
         }

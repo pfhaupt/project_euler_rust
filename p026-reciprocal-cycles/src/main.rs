@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=26
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: u64 = 1000;
     let period_cycles: Vec<u64> = (0..=MAX).map(|n| get_cycle_len(n)).collect();
     let mut max = 0;
@@ -12,6 +15,7 @@ fn main() {
         }
     }
     println!("{}", rec);
+    println!("{:?}", now.elapsed());
 }
 
 fn get_cycle_len(mut n: u64) -> u64 {

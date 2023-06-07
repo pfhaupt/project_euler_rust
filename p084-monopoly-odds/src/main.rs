@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=84
 
 use rand::{Rng, seq::SliceRandom};
+use std::time::Instant;
+
 
 struct Deck {
     index: usize,
@@ -33,6 +35,7 @@ const GO_BACK: usize = BOARD_SIZE * 4;
 const NO_CARD: usize = 999999;
 
 fn main() {
+    let now = Instant::now();
     let mut rng = rand::thread_rng();
 
     let mut cc_cards: Vec<usize> = vec![JAIL_TILE, GO_TILE];
@@ -112,4 +115,5 @@ fn main() {
     count.sort();
     let result = format!("{:02}{:02}{:02}", indices[0], indices[1], indices[2]);
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }

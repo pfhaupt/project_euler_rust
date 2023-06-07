@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=21
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: usize = 10000;
     let mut sum = 0;
     let mut vals: [usize; MAX] = [0; MAX];
@@ -16,6 +19,7 @@ fn main() {
     }
     sum /= 2; // The sum contains both (n, m) and (m, n)
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn d(n: usize) -> usize {

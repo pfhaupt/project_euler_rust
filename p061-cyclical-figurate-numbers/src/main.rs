@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=61
 
 use itertools::Itertools;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut polygons: Vec<Vec<i64>> = vec![];
     for s in 3..=8 {
         let mut n = 1;
@@ -39,6 +42,7 @@ fn main() {
                                                 if is_cyclic(e, f) {
                                                     if is_cyclic(f, a) {
                                                         println!("{}", a + b + c + d + e + f);
+                                                        println!("{:?}", now.elapsed());
                                                         return;
                                                     }
                                                 }

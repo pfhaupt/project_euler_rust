@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=82
 
 use std::fs;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     /* 
     Classic Dijkstra to traverse the "map" of "rough paths".
      */
@@ -24,6 +27,7 @@ fn main() {
     }
     let result = dijkstra(&matrix, &start);
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn dijkstra(matrix: &Vec<Vec<u64>>, start: &Vec<(usize, usize)>) -> u64 {

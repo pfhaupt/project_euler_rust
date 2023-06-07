@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=47
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const STREAK: u64 = 4;
     let mut max = 11;
     let mut primes = calc_primes(vec![2], 3, 11);
@@ -26,6 +29,7 @@ fn main() {
         current += 1;
     }
     println!("{}", current);
+    println!("{:?}", now.elapsed());
 }
 
 fn calc_primes(old_primes: Vec<u64>, from: u64, limit: u64) -> Vec<u64> {

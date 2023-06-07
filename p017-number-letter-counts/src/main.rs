@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=17
 
+use std::time::Instant;
+
 const NUMBERS: [&str; 20] = [
     "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
     "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
@@ -9,6 +11,7 @@ const TENS: [&str; 10] = [
 ];
 
 fn main() {
+    let now = Instant::now();
     const MAX: usize = 1000;
     let mut sum = 0;
     for n in 1..=MAX {
@@ -16,6 +19,7 @@ fn main() {
         sum += name.len();
     }
     println!("{sum}");
+    println!("{:?}", now.elapsed());
 }
 
 fn get_name(n: usize) -> String {

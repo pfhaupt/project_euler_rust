@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=28
 
+use std::time::Instant;
+
 struct Agent {
     x: usize,
     y: usize
@@ -7,6 +9,7 @@ struct Agent {
 const SIZE: usize = 11;
 
 fn main() {
+    let now = Instant::now();
     let mut arr = vec![vec![0; SIZE]; SIZE];
     let mut agent = Agent { x: SIZE / 2, y: SIZE / 2 };
     let mut index = 1;
@@ -37,6 +40,7 @@ fn main() {
     sum -= 1; // we count the middle cell (1) twice
 
     println!("{sum}");
+    println!("{:?}", now.elapsed());
 }
 
 fn next_move(agent: Agent, dir: usize) -> Agent {

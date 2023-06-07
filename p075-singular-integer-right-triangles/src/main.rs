@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=75
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const LIMIT: usize = 1_500_000;
     let mut hits = vec![0; LIMIT + 1];
     let sqrt_limit = f64::sqrt(LIMIT as f64) as usize + 1;
@@ -21,6 +24,7 @@ fn main() {
     }
     let result: usize = hits.iter().filter(|&val|*val == 1).sum();
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn gcd(a: usize, b: usize) -> usize {

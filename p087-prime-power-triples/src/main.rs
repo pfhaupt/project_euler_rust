@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=87
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     const GOAL: u64 = 50_000_000;
     let primes = calc_primes(vec![2], 3, f64::sqrt(GOAL as f64) as u64);
     let mut result = HashSet::new();
@@ -24,6 +27,7 @@ fn main() {
         }
     }
     println!("{}", result.len());
+    println!("{:?}", now.elapsed());
 }
 
 

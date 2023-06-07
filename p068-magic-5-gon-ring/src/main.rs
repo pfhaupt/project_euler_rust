@@ -1,6 +1,8 @@
 // https://projecteuler.net/problem=68
 
 use itertools::Itertools;
+use std::time::Instant;
+
 
 #[derive(Debug, Clone)]
 struct Segment {
@@ -91,10 +93,10 @@ fn main() {
     The solution itself is bruteforce:
     The polygon keeps track of how many points it has, I convert that to an array of [0, 1, .., size - 1]
     and iterate over all possible permutations of that array, setting each point to all values, effectively.
-    With `cargo run --release` it finishes in ~7 seconds.
 
     Creating structs and all that was probably overkill, but I like my OOP. It was also a nice refresher for structs in Rust.
      */
+    let now = Instant::now();
     const SIZE: usize = 5;
     const TARGET_LEN: usize = 16;
     let mut p = Polygon::create(SIZE);
@@ -110,6 +112,7 @@ fn main() {
         }
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 #[allow(dead_code)]

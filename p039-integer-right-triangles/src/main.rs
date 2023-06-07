@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=39
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: usize = 1000;
     let mut result: Vec<usize> = vec![0; MAX + 1];
     for a in 1..=MAX {
@@ -21,4 +24,5 @@ fn main() {
         }
     }
     println!("{}", best_number);
+    println!("{:?}", now.elapsed());
 }

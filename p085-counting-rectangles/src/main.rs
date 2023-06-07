@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=85
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const GOAL: usize = 2_000_000;
     const UPPER_BOUND: usize = 2_000; // a 2000x1 rectangle already has more subrectangles than the GOAL requires
     let mut closest_bet = usize::MAX;
@@ -43,4 +46,5 @@ fn main() {
         }
     }
     println!("{}", closest_area);
+    println!("{:?}", now.elapsed());
 }

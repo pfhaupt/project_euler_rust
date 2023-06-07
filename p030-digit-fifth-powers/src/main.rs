@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=30
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const POWER: u32 = 5;
     const UPPER_BOUND: u64 = 9u64.pow(POWER) * (POWER - 1) as u64;
     let mut total = 0;
@@ -17,4 +20,5 @@ fn main() {
         }
     }
     println!("{}", total);
+    println!("{:?}", now.elapsed());
 }

@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=43
 
 use itertools::Itertools;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let numbers: Vec<u64> = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     let mut pandigital_numbers = numbers.iter().permutations(numbers.len());
     let mut sum = 0;
@@ -17,6 +20,7 @@ fn main() {
         }
     }
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }
 
 fn convert(number_as_vec: Vec<&u64>) -> u64 {

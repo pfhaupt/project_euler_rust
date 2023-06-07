@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=49
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let max = 10001;
     let primes = calc_primes(vec![2], 3, max);
     let primes_as_set: HashSet<u64> = primes.iter().cloned().collect();
@@ -18,6 +21,7 @@ fn main() {
             if primes_as_set.contains(&next_prime) && is_valid_trio(prime, other_prime, next_prime) {
                 let result_string = prime.to_string() + &other_prime.to_string() + &next_prime.to_string();
                 println!("{}", result_string);
+                println!("{:?}", now.elapsed());
                 return;
             }
         }

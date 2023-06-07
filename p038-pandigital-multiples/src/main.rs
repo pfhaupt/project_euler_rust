@@ -1,14 +1,18 @@
 // https://projecteuler.net/problem=38
 
+use std::time::Instant;
+
 fn main() {
     /* 
     Only need to check up to 10000, because we always "add" at least two numbers to the string.
     If number is >=10000, the string has at least 10 digits/chars, and can't ever be pandigital.
      */
+    let now = Instant::now();
     const MAX: usize = 10_000;
     let pandigitals = generate_pandigitals(MAX);
     let result = pandigitals.into_iter().max().unwrap();
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn generate_pandigitals(max: usize) -> Vec<String> {

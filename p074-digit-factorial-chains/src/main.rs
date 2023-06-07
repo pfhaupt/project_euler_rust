@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=74
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const LIMIT: usize = 1_000_000;
     let lookup_factorials: Vec<usize> = (0..10).map(|n| factorial(n)).collect();
     let mut result = 0;
@@ -20,6 +23,7 @@ fn main() {
         }
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn apply_rule(mut n: usize, lookup: &Vec<usize>) -> usize {

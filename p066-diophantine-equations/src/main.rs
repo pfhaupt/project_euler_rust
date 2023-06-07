@@ -2,6 +2,8 @@
 
 use std::{ops, fmt};
 use num_bigint::BigInt;
+use std::time::Instant;
+
 
 #[derive(Clone, Copy)]
 struct Fraction {
@@ -111,6 +113,7 @@ fn main() {
     We then evaluate the fraction, one step at the time, until we find a solution that satisfies the diophantine equation.
     Once we found that solution, we can stop, because Pells equation finds the fundamental solution.
      */
+    let now = Instant::now();
     let mut d_record = 0;
     let mut x_record = 0;
     const D_LIMIT: u128 = 1000;
@@ -133,6 +136,7 @@ fn main() {
         }
     }
     println!("{}", d_record);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_diophantine(x: u128, y: u128, d: u128) -> bool {

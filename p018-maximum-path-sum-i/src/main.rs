@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=18
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let input = 
 "75
 95 64
@@ -85,4 +88,5 @@ fn main() {
     }
 
     println!("{}", arr[LEN - 1][LEN - 1]);
+    println!("{:?}", now.elapsed());
 }

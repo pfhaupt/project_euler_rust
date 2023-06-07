@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=45
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut tri_index: u64 = 1;
     let mut pen_index = 1;
     let mut hex_index = 2;
@@ -23,4 +26,5 @@ fn main() {
         }
     }
     println!("{}", tri_number);
+    println!("{:?}", now.elapsed());
 }

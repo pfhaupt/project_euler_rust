@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=4
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut record = 0;
     for n in 100..1000 {
         for m in 100..1000 {
@@ -20,4 +23,5 @@ fn main() {
         }
     }
     println!("{}", record);
+    println!("{:?}", now.elapsed());
 }

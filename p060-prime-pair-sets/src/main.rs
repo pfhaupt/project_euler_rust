@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=60
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut old_max = 3;
     let mut max = 10_001;
     let mut primes = calc_primes(vec![2], old_max, max);
@@ -15,6 +18,7 @@ fn main() {
         primes = calc_primes(primes, old_max, max);
     }
     println!("{}", result[0].0.iter().sum::<u64>());
+    println!("{:?}", now.elapsed());
 }
 
 fn generate_prime_pairs(primes: &Vec<u64>, size: usize) -> Vec<(Vec<u64>, usize)> {

@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=15
 
+use std::time::Instant;
+
 // The problem asks for a 20x20 grid, but I am calculating the paths for each vertex,
 // and a 20x20 grid means 21 vertices per row/column.
 const WIDTH: usize = 21;
@@ -21,6 +23,7 @@ fn main() {
 
     u128 allows up to WIDTH = HEIGHT = 66 (67 overflows), and the solution prints instantly. This is very impressive.
      */
+    let now = Instant::now();
 
     // Initialize the grid with 0's.
     let mut arr: [[u64; WIDTH]; HEIGHT] = [[0; WIDTH]; HEIGHT];
@@ -48,4 +51,5 @@ fn main() {
 
     // The problem asked for getting from the top left to the bottom right, which is exactly what (0, 0) contains.
     println!("{}", arr[0][0]);
+    println!("{:?}", now.elapsed());
 }

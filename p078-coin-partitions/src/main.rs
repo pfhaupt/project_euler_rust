@@ -3,6 +3,8 @@
 #![allow(dead_code)]
 
 use num_bigint::BigInt;
+use std::time::Instant;
+
 
 fn main() {
     /*
@@ -23,6 +25,7 @@ fn main() {
               If I know that n - k_i is already lower than zero, I don't need to check n - k_(i+1), n - k_(i+2) etc.
               This brings the time down to 0.79 seconds without release mode. Nice.
      */
+    let now = Instant::now();
     let size = 100_000;
     // let pre_computed_p = vec![BigInt::from(0); size];
     // let pre_computed_d = vec![BigInt::from(0); size];
@@ -35,6 +38,7 @@ fn main() {
         let result = p3(n, &mut pre_computed_p);
         if result == 0 {
             println!("{}", n);
+            println!("{:?}", now.elapsed());
             return;
         }
         // if &result % BigInt::from(1_000_000) == BigInt::from(0) {

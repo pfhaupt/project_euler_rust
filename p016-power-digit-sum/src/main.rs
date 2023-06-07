@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=16
 
 use num_bigint::BigUint;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let n = BigUint::from(2u32);
     let mut result = n.clone();
     for _ in 1..1000 {
@@ -17,4 +20,5 @@ fn main() {
         result = result / &ten;
     }
     println!("{}", sum);
+    println!("{:?}", now.elapsed());
 }

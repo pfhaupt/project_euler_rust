@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=14
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     let mut record = 0;
     let mut number = 0;
     const MAX: u64 = 1_000_000;
@@ -15,6 +18,7 @@ fn main() {
         n += 1;
     }
     println!("{}", number);
+    println!("{:?}", now.elapsed());
 }
 
 fn collatz(n: u64) -> u64 {

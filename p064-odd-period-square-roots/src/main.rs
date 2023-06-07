@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=64
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const N: usize = 10_000;
 
     let mut result = 0;
@@ -11,6 +14,7 @@ fn main() {
         }
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn get_period_length(n: u64) -> u64 {

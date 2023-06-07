@@ -1,11 +1,14 @@
 // https://projecteuler.net/problem=83
 
 use std::fs;
+use std::time::Instant;
+
 
 fn main() {
     /* 
     Classic Dijkstra to traverse the "map" of "rough paths".
      */
+    let now = Instant::now();
     let input = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p083-path-sum-four-ways/src/matrix.txt")
                     .expect("Something went wrong when loading the file!");
     let lines = input.lines();
@@ -20,6 +23,7 @@ fn main() {
     }
     let result = dijkstra(&matrix, (0, 0));
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }
 
 fn dijkstra(matrix: &Vec<Vec<u64>>, start: (usize, usize)) -> u64 {

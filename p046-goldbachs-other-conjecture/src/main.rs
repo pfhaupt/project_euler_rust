@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=46
 
 use std::collections::HashSet;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut max = 11;
     let mut primes = calc_primes(vec![2], 3, max);
     let mut primes_as_set: HashSet<u64> = primes.iter().cloned().collect();
@@ -34,6 +37,7 @@ fn main() {
         n = get_next_composite(n, &primes_as_set);
     }
     println!("{}", n);
+    println!("{:?}", now.elapsed());
 }
 
 fn calc_primes(old_primes: Vec<u64>, from: u64, limit: u64) -> Vec<u64> {

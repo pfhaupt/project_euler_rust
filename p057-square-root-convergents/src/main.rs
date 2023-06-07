@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=57
 
 use num_bigint::BigUint;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut result = 0;
     let mut numerator = BigUint::from(1u32);
     let mut denominator = BigUint::from(1u32);
@@ -18,4 +21,5 @@ fn main() {
         denominator = new_denominator;
     }
     println!("{}", result);
+    println!("{:?}", now.elapsed());
 }

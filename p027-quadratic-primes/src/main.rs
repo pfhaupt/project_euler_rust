@@ -1,6 +1,9 @@
 // https://projecteuler.net/problem=27
 
+use std::time::Instant;
+
 fn main() {
+    let now = Instant::now();
     const MAX: i64 = 1000;
 
     let mut record_a = 0;
@@ -24,6 +27,7 @@ fn main() {
         }
     }
     println!("{}", record_a * record_b);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_prime(n: i64) -> bool {

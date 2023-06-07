@@ -1,8 +1,11 @@
 // https://projecteuler.net/problem=80
 
 use num_bigint::BigUint;
+use std::time::Instant;
+
 
 fn main() {
+    let now = Instant::now();
     let mut total = 0;
     for n in 1..100 {
         let expansion = calculate_digits(n, 99);
@@ -13,6 +16,7 @@ fn main() {
         }
     }
     println!("{}", total);
+    println!("{:?}", now.elapsed());
 }
 
 fn get_sum(expansion: &BigUint) -> u64 {

@@ -1,5 +1,7 @@
 // https://projecteuler.net/problem=58
 
+use std::time::Instant;
+
 fn main() {
     /* 
     37 36 35 34 33 32 31
@@ -24,6 +26,7 @@ fn main() {
     4 * (s2 - 2) - 2
     d = 4 * s - 10
      */
+    let now = Instant::now();
     let mut size = 3;
     let mut prime_counter = 0;
     let mut numbers_on_diagonals = 1;
@@ -62,6 +65,7 @@ fn main() {
         size += 2;
     }
     println!("{}", size);
+    println!("{:?}", now.elapsed());
 }
 
 fn is_prime(candidate: u64) -> bool {
