@@ -8,11 +8,11 @@ fn main() {
     // See Problem 18 for a description of my implementation
     let now = Instant::now();
     
-    let input = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p067-maximum-path-sum-ii/src/triangle.txt")
-    .expect("Something went wrong when loading the file!");
+    let input = fs::read_to_string("src/triangle.txt")
+                            .expect("Something went wrong when loading the file!");
 
     let mut number_vec: Vec<Vec<u64>> = vec![];
-    let lines = input.split("\n");
+    let lines = input.lines();
     for line in lines {
         let numbers = line.split(" ");
         let digits: Vec<u64> = numbers.map(|n| str::parse(n).unwrap()).collect();

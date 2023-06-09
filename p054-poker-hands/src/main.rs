@@ -48,9 +48,9 @@ const ROYAL_FLUSH: u8 = 9;
 
 fn main() {
     let now = Instant::now();
-    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p054-poker-hands/src/poker.txt")
+    let contents = fs::read_to_string("src/poker.txt")
         .expect("Something went wrong when loading the file!");
-    let hands: Vec<&str> = contents.split("\r\n").collect();
+    let hands: Vec<&str> = contents.lines().collect();
     let mut rounds: Vec<Vec<&str>> = vec![];
     for hand in hands {
         let round = hand.split(" ").collect();

@@ -6,7 +6,7 @@ use std::time::Instant;
 
 fn main() {
     let now = Instant::now();
-    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p022-names-scores/src/names.txt")
+    let contents = fs::read_to_string("src/names.txt")
         .expect("Something went wrong when loading the file!");
 
     let names: Vec<&str> = contents.split(",").collect();

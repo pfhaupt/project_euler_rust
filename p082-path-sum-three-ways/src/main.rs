@@ -9,8 +9,8 @@ fn main() {
     /* 
     Classic Dijkstra to traverse the "map" of "rough paths".
      */
-    let input = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p082-path-sum-three-ways/src/matrix.txt")
-                    .expect("Something went wrong when loading the file!");
+    let input = fs::read_to_string("src/matrix.txt")
+                            .expect("Something went wrong when loading the file!");
     let lines = input.lines();
     let mut matrix = vec![];
     for line in lines {

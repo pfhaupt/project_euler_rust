@@ -80,9 +80,9 @@ fn main() {
     Sort the list based on all orders
      */
     let now = Instant::now();
-    let contents = fs::read_to_string("C:/Users/Philippe/RustProjects/project_euler_rust/p079-passcode-derivation/src/keylog.txt")
+    let contents = fs::read_to_string("src/keylog.txt")
         .expect("Something went wrong when loading the file!");
-    let passcodes: Vec<u64> = contents.split("\r\n").map(|s|s.parse().unwrap()).collect();
+    let passcodes: Vec<u64> = contents.lines().map(|s|s.parse().unwrap()).collect();
     let mut code_guess = vec![];
     let mut known_orders = vec![];
     for code in passcodes {
