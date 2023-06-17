@@ -4,63 +4,27 @@ use std::time::Instant;
 
 fn main() {
     let now = Instant::now();
-    const STREAK: u64 = 4;
-    let mut max = 11;
-    let mut primes = calc_primes(vec![2], 3, 11);
-    let mut current = 1;
-    loop {
-        if 2 * current > max {
-            let new_limit = 2 * max + 1;
-            primes = calc_primes(primes, max, new_limit);
-            max = new_limit;
-        }
-        let mut valid = true;
-        for i in 0..STREAK {
-            let n = current + i;
-            let prime_factors = get_unique_prime_factors(n, &primes);
-            if prime_factors.len() as u64 != STREAK {
-                valid = false;
-                break;
+    const LIMIT: usize = 1_000_000; // Just a wild guess
+    const TARGET_FACTOR_COUNT: i64 = 4;
+    const STREAK: usize = 4;
+    let mut factor_count = vec![0; LIMIT];
+    let mut consecutive = 0;
+    for n in 2..LIMIT {
+        if factor_count[n] == 0 {
+            // found a prime, can't be part of the sequence
+            consecutive = 0;
+            for multiple in ((2*n)..LIMIT).step_by(n) {
+                factor_count[multiple] += 1;
             }
-        }
-        if valid {
-            break;
-        }
-        current += 1;
-    }
-    println!("{}", current);
-    println!("{:?}", now.elapsed());
-}
-
-fn calc_primes(old_primes: Vec<u64>, from: u64, limit: u64) -> Vec<u64> {
-    let mut primes: Vec<u64> = old_primes;
-    for number in (from..limit).step_by(2) {
-        let sqrt = f64::sqrt(number as f64) as u64;
-        let mut prime = true;
-        for p in &primes {
-            if p > &sqrt {
-                break;
-            } else if number % p == 0 {
-                prime = false;
-                break;
+        } else if factor_count[n] == TARGET_FACTOR_COUNT {
+            consecutive += 1;
+            if consecutive == STREAK {
+                println!("{}", n - STREAK + 1);
+                println!("{:?}", now.elapsed());
+                return;
             }
-        }
-        if prime {
-            primes.push(number);
-        }
-    }
-    primes
-}
-
-fn get_unique_prime_factors(number: u64, primes: &Vec<u64>) -> Vec<u64> {
-    let mut result = vec![];
-    for p in primes {
-        if p > &number {
-            break;
-        }
-        if number % p == 0 {
-            result.push(*p);
+        } else {
+            consecutive = 0;
         }
     }
-    result
 }
