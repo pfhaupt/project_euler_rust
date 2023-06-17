@@ -52,13 +52,31 @@ fn main() {
     const GOAL: usize = 1_000_000;
     let mut m = 1;
     let mut solutions = 0;
+    let mut squares = vec![false; 20_000_000]; // M=2000 => Worst distance of (2000 + 2000)^2 + 2000^2 = 20_000_000
+    for i in 0..squares.len() {
+        if i * i > squares.len() {
+            break;
+        }
+        squares[i * i] = true;
+    }
+    // loop {
+    //     let a = m;
+    //     for b in 1..=a {
+    //         for c in 1..=b {
+    //             if squares[a * a + (b + c) * (b + c)] {
+    //                 solutions += 1;
+    //             }
+    //         }
+    //     }
+    //     if solutions > GOAL {
+    //         break;
+    //     }
+    //     m += 1;
+    // }
     loop {
-        let a = m;
-        for b in 1..=a {
-            for c in 1..=b {
-                if (f64::sqrt((a * a + (b + c) * (b + c)) as f64)).fract() == 0.0 {
-                    solutions += 1;
-                }
+        for s in 2..=(2 * m) {
+            if squares[s * s + m * m] {
+                solutions += 1 + m.min(s - 1) - (s + 1) / 2;
             }
         }
         if solutions > GOAL {
