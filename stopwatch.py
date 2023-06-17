@@ -180,7 +180,7 @@ if __name__ == "__main__":
             date = datetime.today().strftime('%d.%m.%Y (%H:%M)')
             readme.write(f"Currently the {SLOWEST} slowest programs are:\n")
             readme.write("| Time | Project |\n")
-            readme.write("| --- | --- |\n")
+            readme.write("| :---: | --- |\n")
             overtime = False
             for (_, t, path) in all_projects[:SLOWEST]:
                 if ">" in t:
