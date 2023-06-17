@@ -2,6 +2,8 @@ import os, subprocess
 import re
 import time
 
+from datetime import datetime
+
 from operator import itemgetter
 
 """
@@ -17,11 +19,12 @@ The 5 lines below this comment block can be set to benchmark specific projects.
 I'll eventually change the script to work with CLI input, such as `python stopwatch.py 50 80` for running IDs 50 to 80.
 """
 
-START_ID = 5
-LAST_ID = 11
+START_ID = 0
+LAST_ID = 100
 TIMEOUT = 1
 RELEASE = True
 SLOWEST = 10
+UPDATE_README = True
 
 def get_output(release=False, timeout=999999999):
     text = ""
@@ -148,17 +151,41 @@ if __name__ == "__main__":
     for (_, t, path) in all_projects:
         print(f"{t:>8}: {path}")
     print()
+
     print("The following programs crashed:")
     for path in crashed:
         print(path)
     print(f"That's {len(crashed)}/{LAST_ID} programs or {(len(crashed) * 100 / LAST_ID):.2f}%.")
     print()
+
     print(f"The following programs did not get sub {TIMEOUT}sec:")
     for path in not_sub:
         print(path)
     print(f"That's {len(not_sub)}/{LAST_ID} programs or {(len(not_sub) * 100 / LAST_ID):.2f}%.")
     print()
+
     print(f"The {SLOWEST} slowest programs are:")
     for (_, t, path) in all_projects[:SLOWEST]:
         print(f"{t:>8}: {path}")
-        
+    print()
+
+    if UPDATE_README:
+        prev_readme = "".join(open("README.md", "r").readlines())
+        os.remove("README.md")
+        with open("README.md", "x", encoding="utf-8") as readme:
+            if "\n## Benchmarks\n" in prev_readme:
+                prev_readme = prev_readme.split("\n## Benchmarks\n")[0]
+            readme.write(prev_readme)
+            readme.write("\n## Benchmarks\n")
+            date = datetime.today().strftime('%d.%m.%Y (%H:%M)')
+            readme.write(f"As of {date}, the {SLOWEST} slowest programs are:\n")
+            readme.write("| Time | Project |\n")
+            readme.write("| --- | --- |\n")
+            overtime = False
+            for (_, t, path) in all_projects[:SLOWEST]:
+                if ">" in t:
+                    overtime = True
+                readme.write(f"|{t:>8}|{path}|\n")
+            if overtime:
+                readme.write(f"\nA `>` indicates that the program did not finish within my set timeout of {TIMEOUT}s.\n")
+        print("Updated README.md with the current benchmarks.")
