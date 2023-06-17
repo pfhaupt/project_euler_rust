@@ -1,57 +1,38 @@
 // https://projecteuler.net/problem=41
 
 use std::time::Instant;
+use itertools::Itertools;
 
 fn main() {
     let now = Instant::now();
-    let mut n: usize = 1;
     let mut biggest = 0;
-    loop {
-        if n == 8 {
-            // we can stop at 7 digits, because all 8- and 9-digit pandigitals are divisible by 3.
-            break;
+    // Largest pandigital prime is 7 digits long, because all 8- and 9-digit pandigitals are divisible by 3
+    let digits = (1..=7).collect_vec();
+    let mut perms = digits.iter().permutations(digits.len());
+    while let Some(candidate) = perms.next() {
+        let mut number = 0;
+        for d in candidate {
+            number = number * 10 + d;
         }
-        let primes: Vec<usize> = calc_primes(10usize.pow(n as u32));
-        let pandigital_primes: Vec<usize> = primes.into_iter().filter(|p| is_pandigital(*p, n)).collect();
-        if let Some(record) = pandigital_primes.into_iter().max() { // First time ever needing Some()
-            biggest = record; // because our digits always increase, we don't need max()
+        if is_prime(number) {
+            biggest = biggest.max(number);
         }
-        n += 1;
     }
     println!("{}", biggest);
     println!("{:?}", now.elapsed());
 }
 
-fn is_pandigital(number: usize, n: usize) -> bool {
-    let number = number.to_string();
-    for digit in 1..=n {
-        let s = digit.to_string();
-        if !number.contains(&s) {
-            return false;
-        }
+fn is_prime(n: u64) -> bool {
+    if n == 2 || n == 3 { return true; }
+    if n < 2 || n % 2 == 0 { return false; }
+    if n < 9 { return true; }
+    if n % 3 == 0 { return false; }
+    let r = f64::sqrt(n as f64) as u64;
+    let mut f = 5;
+    while f <= r {
+        if n % f == 0 { return false; }
+        if n % (f + 2) == 0 { return false; } 
+        f += 6;
     }
-    number.len() == n
-}
-
-fn calc_primes(max: usize) -> Vec<usize> {
-    let mut primes: Vec<usize> = vec![2];
-    for number in (3..=max).step_by(2) {
-        if is_prime(number, &primes) {
-            primes.push(number);
-        }
-    }
-    primes
-}
-
-fn is_prime(number: usize, primes: &Vec<usize>) -> bool {
-    let sqrt = f64::sqrt(number as f64) as usize;
-    for prime in primes {
-        if prime > &sqrt {
-            break;
-        }
-        if number % prime == 0 {
-            return false
-        }
-    }
-    true
+    return true;
 }
