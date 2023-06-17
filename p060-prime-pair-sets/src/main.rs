@@ -4,62 +4,46 @@ use std::time::Instant;
 
 fn main() {
     let now = Instant::now();
-    let mut old_max = 3;
-    let mut max = 10_001;
-    let mut primes = calc_primes(vec![2], old_max, max);
-    let mut result: Vec<(Vec<u64>, usize)>;
-    loop {
-        result = generate_prime_pairs(&primes, 5);
-        if result.len() > 0 {
-            break;
-        }
-        old_max = max;
-        max = 2 * max + 1;
-        primes = calc_primes(primes, old_max, max);
-    }
-    println!("{}", result[0].0.iter().sum::<u64>());
-    println!("{:?}", now.elapsed());
-}
-
-fn generate_prime_pairs(primes: &Vec<u64>, size: usize) -> Vec<(Vec<u64>, usize)> {
+    let old_max = 3;
+    let max = 10_001;
+    let primes = calc_primes(vec![2], old_max, max);
     let len = primes.len();
-    let mut result = vec![];
-    if size == 1 {
-        for i in 0..len {
-            let prime = &primes[i];
-            result.push((vec![*prime], i));
+    let mut pair_lookup = vec![vec![false; len]; len];
+    // Instead of re-calculating all concatenations and pair-status all the time, I can just save it in a lookup table.
+    for i in 0..len {
+        for j in (i+1)..len {
+            let c1 = get_concatenation(primes[i], primes[j]);
+            let c2 = get_concatenation(primes[j], primes[i]);
+            if is_prime(c1) && is_prime(c2) {
+                pair_lookup[i][j] = true;
+                pair_lookup[j][i] = true;
+            }
         }
-    } else {
-        let smaller_pairs = generate_prime_pairs(primes, size - 1);
-        for tuple in smaller_pairs {
-            let pair = tuple.0;
-            let highest = tuple.1;
-            for i in highest..len {
-                let prime = &primes[i];
-                let valid = check_pair_status(&pair, prime);
-                if valid {
-                    let mut new_pair = pair.clone();
-                    new_pair.push(*prime);
-                    result.push((new_pair, i));
+    }
+    let mut lowest = u64::MAX;
+    for i in 0..len {
+        for j in (i+1)..len {
+            if pair_lookup[i][j] { // set of two primes
+                for k in (j+1)..len {
+                    if pair_lookup[j][k] && pair_lookup[i][k] { // set of three primes
+                        for l in (k+1)..len {
+                            if pair_lookup[i][l] && pair_lookup[j][l] && pair_lookup[k][l] { // set of four primes
+                                for m in (l+1)..len {
+                                    if pair_lookup[i][m] && pair_lookup[j][m] && pair_lookup[k][m] && pair_lookup[l][m] { // set of five primes
+                                        let sum = primes[i] + primes[j] + primes[k] + primes[l] + primes[m];
+                                        lowest = lowest.min(sum);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-    result
-}
-
-fn check_pair_status(pair: &Vec<u64>, candidate: &u64) -> bool {
-    for prime in pair {
-        let left_concat = get_concatenation(*candidate, *prime);
-        if !is_prime(left_concat) {
-            return false;
-        }
-        let right_concat = get_concatenation(*prime, *candidate);
-        if !is_prime(right_concat) {
-            return false;
-        }
-    }
-    true
+    println!("{}", lowest);
+    println!("{:?}", now.elapsed());
+    return;
 }
 
 fn get_concatenation(left_side: u64, right_side: u64) -> u64 {
