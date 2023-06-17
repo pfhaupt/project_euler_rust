@@ -13,7 +13,6 @@ Contributions are not currently accepted for this repository, as it is primarily
 Currently the 10 slowest programs are:
 | Time | Project |
 | --- | --- |
-|     >1s|./p034-digit-factorials/Cargo.toml|
 |     >1s|./p041-pandigital-prime/Cargo.toml|
 |     >1s|./p047-distinct-primes-factors/Cargo.toml|
 |     >1s|./p051-prime-digit-replacements/Cargo.toml|
@@ -23,5 +22,6 @@ Currently the 10 slowest programs are:
 |     >1s|./p086-cuboid-route/Cargo.toml|
 |     >1s|./p088-product-sum-numbers/Cargo.toml|
 |     >1s|./p093-arithmetic-expressions/Cargo.toml|
+|724.05ms|./p068-magic-5-gon-ring/Cargo.toml|
 
 A `>` indicates that the program did not finish within my set timeout of 1s.

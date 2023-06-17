@@ -33,10 +33,12 @@ fn main() {
 }
 
 fn get_sum(number: u64) -> u64 {
+    let mut number = number;
     let mut result = 0;
-    for ch in number.to_string().bytes() {
-        let digit = (ch as u64) - 48;
+    while number != 0 {
+        let digit = number % 10;
         result += factorial(digit);
+        number /= 10;
     }
     result
 }
