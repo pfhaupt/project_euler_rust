@@ -13,15 +13,15 @@ Contributions are not currently accepted for this repository, as it is primarily
 Currently the 10 slowest programs are:
 | Time | Project |
 | --- | --- |
-|     >1s|./p076-counting-summations/Cargo.toml|
 |     >1s|./p086-cuboid-route/Cargo.toml|
 |     >1s|./p088-product-sum-numbers/Cargo.toml|
 |     >1s|./p093-arithmetic-expressions/Cargo.toml|
-| 733.4ms|./p068-magic-5-gon-ring/Cargo.toml|
-|542.17ms|./p070-totient-permutation/Cargo.toml|
-|532.05ms|./p034-digit-factorials/Cargo.toml|
-|524.59ms|./p051-prime-digit-replacements/Cargo.toml|
-|500.04ms|./p060-prime-pair-sets/Cargo.toml|
-|487.67ms|./p074-digit-factorial-chains/Cargo.toml|
+|749.86ms|./p068-magic-5-gon-ring/Cargo.toml|
+|518.65ms|./p070-totient-permutation/Cargo.toml|
+|517.51ms|./p034-digit-factorials/Cargo.toml|
+|510.55ms|./p060-prime-pair-sets/Cargo.toml|
+|464.95ms|./p074-digit-factorial-chains/Cargo.toml|
+| 440.7ms|./p073-counting-fractions-in-a-range/Cargo.toml|
+|426.86ms|./p051-prime-digit-replacements/Cargo.toml|
 
 A `>` indicates that the program did not finish within my set timeout of 1s.

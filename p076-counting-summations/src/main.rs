@@ -2,31 +2,35 @@
 
 use std::time::Instant;
 
-const GOAL: i32 = 100;
+const GOAL: usize = 101;
 
 fn main() {
-    let now = Instant::now();
-    let result = count_ways(GOAL, 0) - 1;
-    println!("{}", result);
-    println!("{:?}", now.elapsed());
-}
+    /*
+    https://oeis.org/A000065
+    https://oeis.org/A026820
 
-fn count_ways(depth: i32, acc: i32) -> i32 {
-    // Adapted from Problem 31
-    if depth == 0 {
-        return if acc == GOAL { 1 } else { 0 };
-    }
-    let mut valid = 0;
-    let amount = GOAL / depth;
-    for i in 0..=amount {
-        let this_sum = acc + i * depth;
-        if this_sum == GOAL {
-            valid += 1;
-        } else if this_sum > GOAL {
-            break;
+    Recursively:
+    fn T(n: usize, k: usize) -> usize {
+        if n == 0 || k == 1 {
+            1
         } else {
-            valid += count_ways(depth - 1, this_sum);
+            T(n, k - 1) + if k > n { 0 } else { T(n - k, k) }
         }
     }
-    return valid;
+    (Not feasible calling T(100, 100))
+    instead: dynamic programming
+    */
+    let now = Instant::now();
+    let mut triangle = vec![vec![0; GOAL]; GOAL];
+    for n in 0..GOAL {
+        for k in 1..GOAL {
+            triangle[n][k] = if n == 0 || k == 1 {
+                1
+            } else {
+                triangle[n][k - 1] + if k > n { 0 } else { triangle[n - k][k] }
+            };
+        }
+    }
+    println!("{}", triangle[GOAL - 1][GOAL - 2]);
+    println!("{:?}", now.elapsed());
 }
