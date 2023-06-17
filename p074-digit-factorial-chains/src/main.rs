@@ -1,6 +1,7 @@
 // https://projecteuler.net/problem=74
 
 use std::time::Instant;
+use rustc_hash::FxHashSet;
 
 fn main() {
     let now = Instant::now();
@@ -8,14 +9,15 @@ fn main() {
     let lookup_factorials: Vec<usize> = (0..10).map(|n| factorial(n)).collect();
     let mut result = 0;
     for n in 1..LIMIT {
-        let mut values = vec![n];
+        let mut values = FxHashSet::with_capacity_and_hasher(60, Default::default());
+        values.insert(n);
         let mut current = n;
         loop {
             let next = apply_rule(current, &lookup_factorials);
             if values.contains(&next) {
                 break;
             }
-            values.push(next);
+            values.insert(next);
             current = next;
         }
         if values.len() == 60 {
