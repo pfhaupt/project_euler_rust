@@ -178,7 +178,7 @@ if __name__ == "__main__":
             readme.write(prev_readme)
             readme.write("\n## Benchmarks\n")
             date = datetime.today().strftime('%d.%m.%Y (%H:%M)')
-            readme.write(f"As of {date}, the {SLOWEST} slowest programs are:\n")
+            readme.write(f"Currently the {SLOWEST} slowest programs are:\n")
             readme.write("| Time | Project |\n")
             readme.write("| --- | --- |\n")
             overtime = False

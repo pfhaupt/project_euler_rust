@@ -10,7 +10,7 @@ The primary motivation behind this repository is to learn and become proficient 
 ## Contributing
 Contributions are not currently accepted for this repository, as it is primarily a personal learning project. However, feel free to use the code as a reference or inspiration for your own solutions.
 ## Benchmarks
-As of 17.06.2023 (17:04), the 10 slowest programs are:
+Currently the 10 slowest programs are:
 | Time | Project |
 | --- | --- |
 |     >1s|./p034-digit-factorials/Cargo.toml|
