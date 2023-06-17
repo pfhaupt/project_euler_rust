@@ -1,6 +1,5 @@
 // https://projecteuler.net/problem=51
 
-use std::collections::HashSet;
 use std::iter::successors;
 use itertools::Itertools;
 use std::time::Instant;
@@ -14,10 +13,13 @@ fn main() {
     let mut old_max = 3;
     let mut max = 1_000_001;
     let mut primes = calc_primes(vec![2], old_max, max);
-    let mut primes_as_set: HashSet<u64> = primes.iter().cloned().collect();
+    let mut visited = vec![false; 1_000_000];
     const GOAL: usize = 8;
     loop {
         'prime_loop: for prime in &primes {
+            if visited[*prime as usize] {
+                continue;
+            }
             let prime_len = successors(Some(*prime), |&n| (n >= 10).then(|| n / 10)).count();
             let combinations = generate_combinations(*prime);
             for combination in &combinations {
@@ -33,12 +35,15 @@ fn main() {
                             break 'prime_loop;
                         }
                         let parsed_len = successors(Some(n), |&n| (n >= 10).then(|| n / 10)).count();
-                        if prime_len == parsed_len && is_prime(n, &primes_as_set) {
+                        if prime_len == parsed_len && is_prime(n) {
                             counter += 1;
                             family.push(n);
                         }
                     } else {
                         panic!("{} could not be parsed.", replacement);
+                    }
+                    for elem in &family {
+                        visited[*elem as usize] = true;
                     }
                     if counter == GOAL {
                         println!("{}", family.iter().min().unwrap());
@@ -51,7 +56,6 @@ fn main() {
         old_max = max;
         max = 10 * old_max + 1;
         primes = calc_primes(primes, old_max, max);
-        primes_as_set = primes.iter().cloned().collect();
     }
 }
 
@@ -82,9 +86,21 @@ fn generate_combinations(number: u64) -> Vec<String> {
     return_vec
 }
 
-fn is_prime(candidate: u64, primes: &HashSet<u64>) -> bool {
-    primes.contains(&candidate)
+fn is_prime(n: u64) -> bool {
+    if n == 2 || n == 3 { return true; }
+    if n < 2 || n % 2 == 0 { return false; }
+    if n < 9 { return true; }
+    if n % 3 == 0 { return false; }
+    let r = f64::sqrt(n as f64) as u64;
+    let mut f = 5;
+    while f <= r {
+        if n % f == 0 { return false; }
+        if n % (f + 2) == 0 { return false; } 
+        f += 6;
+    }
+    return true;
 }
+
 
 fn calc_primes(old_primes: Vec<u64>, mut from: u64, limit: u64) -> Vec<u64> {
     if from % 2 == 0 {
