@@ -1,7 +1,7 @@
-*/target/
+**/target/
 # Script for adding timers
 time.ahk
-/p795*
-/p843*
+**/p795*
+**/p843*
 /cmd-test/
 /stopwatch/
