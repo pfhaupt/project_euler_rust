@@ -214,13 +214,24 @@ if __name__ == "__main__":
     ask_for_cli()
     
     paths = [folder for folder in os.listdir() if folder.startswith("p")]
-
-    ids = [int(re.findall('\d+', p)[0]) for p in paths]
-
-    # measure_clean(paths, ids)
-    # exit()
-    measure_build(paths, ids)
-    all_projects, crashed, not_sub = measure_exec(paths, ids)
+    all_projects, crashed, not_sub = [], [], []
+    for p in paths:
+        os.chdir(p)
+        print(f"Entering /{p}/")
+        sub_paths = [folder for folder in os.listdir() if folder.startswith("p")]
+        if len(sub_paths) > 0:
+            ids = [int(re.findall('\d+', p)[0]) for p in sub_paths]
+            if any(flags["START_ID"] <= id <= flags["LAST_ID"] for id in ids):
+                # measure_clean(paths, ids)
+                # exit()
+                measure_build(sub_paths, ids)
+                all, crash, not_s = measure_exec(sub_paths, ids)
+                all_projects.extend(all)
+                crashed.extend(crash)
+                not_sub.extend(not_s)
+            else:
+                print("Skipping folder because no Project ID is in START-END range!")
+        os.chdir("..")
     
     all_projects.sort(key=itemgetter(0), reverse=True)
 
