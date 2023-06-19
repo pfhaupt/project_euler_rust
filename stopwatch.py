@@ -24,7 +24,7 @@ LAST_ID = 100
 TIMEOUT = 1
 RELEASE = True
 SLOWEST = 10
-UPDATE_README = True
+UPDATE_README = False
 
 def get_output(release=False, timeout=999999999):
     text = ""
