@@ -15,16 +15,17 @@ It then sorts the created list by time_in_µs, and prints that list to the conso
 It also takes note of any problem that crashed (for example if Rust needed to load a file, but did not find it),
  and all problems that did not finish within the specified TIMEOUT (so that I can optimize them).
 It also prints the n slowest programs with their execution time.
-The 5 lines below this comment block can be set to benchmark specific projects.
-I'll eventually change the script to work with CLI input, such as `python stopwatch.py 50 80` for running IDs 50 to 80.
 """
 
-START_ID = 0
-LAST_ID = 100
-TIMEOUT = 1
-RELEASE = True
-SLOWEST = 10
-UPDATE_README = False
+# Default values, please don't change
+flags = {
+    "START_ID": 0,
+    "LAST_ID": 100,
+    "TIMEOUT": 1,
+    "RELEASE": True,
+    "SLOWEST": 10,
+    "UPDATE_README": False
+}
 
 def get_output(release=False, timeout=999999999):
     text = ""
@@ -49,14 +50,14 @@ def call_cmd(cmd, timeout=999999999):
 
 def measure_clean(paths, ids):
     for id, path in zip(ids, paths):
-        if id < START_ID:
+        if id < flags["START_ID"]:
             continue
-        if id > LAST_ID:
+        if id > flags["LAST_ID"]:
             break
         project_path = "./" + path + "/Cargo.toml"
         os.chdir(path)
         start_time = time.perf_counter_ns()
-        call_cmd(RUN_CMD(mode="clean", release=RELEASE))
+        call_cmd(RUN_CMD(mode="clean", release=flags["RELEASE"]))
         compile_time = (time.perf_counter_ns() - start_time) / 1e9
         compile_time, _ = translate(f"{compile_time * 1000}ms")
         print(f"Cleaning {project_path} took {compile_time}.")
@@ -65,14 +66,14 @@ def measure_clean(paths, ids):
 
 def measure_build(paths, ids):
     for id, path in zip(ids, paths):
-        if id < START_ID:
+        if id < flags["START_ID"]:
             continue
-        if id > LAST_ID:
+        if id > flags["LAST_ID"]:
             break
         os.chdir(path)
         project_path = "./" + path + "/Cargo.toml"
         start_time = time.perf_counter_ns()
-        call_cmd(RUN_CMD(mode="build", release=RELEASE))
+        call_cmd(RUN_CMD(mode="build", release=flags["RELEASE"]))
         compile_time = (time.perf_counter_ns() - start_time) / 1e9
         compile_time, _ = translate(f"{compile_time * 1000}ms")
         print(f"Building {project_path} took {compile_time}.")
@@ -84,22 +85,23 @@ def measure_exec(paths, ids):
     crashed = []
     not_sub = []
     for id, path in zip(ids, paths):
-        if id < START_ID:
+        if id < flags["START_ID"]:
             continue
-        if id > LAST_ID:
+        if id > flags["LAST_ID"]:
             break
         timeout = False
         os.chdir(path)
         project_path = "./" + path + "/Cargo.toml"
         try:
-            success, time_as_list = get_output(release=RELEASE, timeout=TIMEOUT)
+            success, time_as_list = get_output(release=flags["RELEASE"], timeout=flags["TIMEOUT"])
             time_as_list = parse(time_as_list)
             time_as_list, time_in_ms = translate(time_as_list)
         except subprocess.TimeoutExpired:
-            print(f"THIS PROGRAM NEEDED LONGER THAN {TIMEOUT} SECONDS TO FINISH!")
+            tmo = flags["TIMEOUT"]
+            print(f"THIS PROGRAM NEEDED LONGER THAN {tmo} SECONDS TO FINISH!")
             timeout = True
-            time_in_ms = TIMEOUT * 1_000_000
-            time_as_list = f">{TIMEOUT}s"
+            time_in_ms = tmo * 1_000_000
+            time_as_list = f">{tmo}s"
         print(f"Running {project_path} took {time_as_list}.")
         all_projects.append((time_in_ms, time_as_list, project_path))
         if timeout:
@@ -132,13 +134,87 @@ def translate(time):
             exit(1)
     return f"{old_dur}{unit}", dur
 
+def parse_input(type, msg):
+    while True:
+        inp = input()
+        if inp == "":
+            return None
+        try:
+            inp = type(inp)
+            if inp < 0:
+                print(msg)
+                continue
+            break
+        except:
+            print(msg)
+            pass
+    return inp
+
+def ask_for_cli():
+    assert len(flags) == 6, "Please ask for all flags in ask_for_cli()"
+    print("Welcome to the setup of this script!")
+    print("Leave a line empty [Press ENTER] to keep the default value.")
+
+    print(f"Select Start ID (Default: " + str(flags["START_ID"]) + ")")
+    sid = parse_input(int, "Please enter a number >= 0")
+    if sid == None:
+        sid = flags["START_ID"]
+    flags["START_ID"] = sid
+
+    print(f"Select End ID (Default: " + str(flags["LAST_ID"]) + ")")
+    while True:
+        eid = parse_input(int, "Please enter a number >= 0")
+        if eid == None:
+            eid = flags["LAST_ID"]
+            break
+        if eid < sid:
+            print("End ID must be greater than Start ID!")
+        else:
+            break
+    flags["LAST_ID"] = eid
+
+    print(f"Select Timeout in seconds (Default: " + str(flags["TIMEOUT"]) + ")")
+    to = parse_input(int, "Please enter a number >= 1")
+    if to == None:
+        to = flags["TIMEOUT"]
+    flags["TIMEOUT"] = to
+
+    print("Benchmark in Release Mode? (Default: " + str(flags["RELEASE"]) + ")")
+    while True:
+        rel = parse_input(int, "Please enter 0 (False) or 1 (True)")
+        if rel == None or rel == 0 or rel == 1:
+            break
+        else:
+            print("Please enter 0 (False) or 1 (True)")
+    if rel == None:
+        rel = flags["RELEASE"]
+    flags["RELEASE"] = bool(rel)
+
+    print("How many programs should be printed? (Default: " + str(flags["SLOWEST"]) + " slowest programs)")
+    slo = parse_input(int, "Please enter a number >= 0")
+    if slo == None:
+        slo = flags["SLOWEST"]
+    flags["SLOWEST"] = slo
+
+    print("Update README? (Default: " + str(flags["UPDATE_README"]) + ")")
+    while True:
+        rdme = parse_input(int, "Please enter 0 (False) or 1 (True)")
+        if rdme == None or rdme == 0 or rdme == 1:
+            break
+        else:
+            print("Please enter 0 (False) or 1 (True)")
+    if rdme == None:
+        rdme = flags["UPDATE_README"]
+    flags["UPDATE_README"] = bool(rdme)
+    
+    print("Successfully set all flags!")
+
 if __name__ == "__main__":
+    ask_for_cli()
+    
     paths = [folder for folder in os.listdir() if folder.startswith("p")]
-    # print(paths)
 
     ids = [int(re.findall('\d+', p)[0]) for p in paths]
-    # paths = ["./" + path + "/Cargo.toml" for path in paths]
-    # print(ids)
 
     # measure_clean(paths, ids)
     # exit()
@@ -152,24 +228,27 @@ if __name__ == "__main__":
         print(f"{t:>8}: {path}")
     print()
 
+    lid = flags["LAST_ID"]
+    tmo = flags["TIMEOUT"]
     print("The following programs crashed:")
     for path in crashed:
         print(path)
-    print(f"That's {len(crashed)}/{LAST_ID} programs or {(len(crashed) * 100 / LAST_ID):.2f}%.")
+    print(f"That's {len(crashed)}/{lid} programs or {(len(crashed) * 100 / lid):.2f}%.")
     print()
 
-    print(f"The following programs did not get sub {TIMEOUT}sec:")
+    print(f"The following programs did not get sub {tmo}sec:")
     for path in not_sub:
         print(path)
-    print(f"That's {len(not_sub)}/{LAST_ID} programs or {(len(not_sub) * 100 / LAST_ID):.2f}%.")
+    print(f"That's {len(not_sub)}/{lid} programs or {(len(not_sub) * 100 / lid):.2f}%.")
     print()
 
-    print(f"The {SLOWEST} slowest programs are:")
-    for (_, t, path) in all_projects[:SLOWEST]:
+    slo = flags["SLOWEST"]
+    print(f"The {slo} slowest programs are:")
+    for (_, t, path) in all_projects[:slo]:
         print(f"{t:>8}: {path}")
     print()
 
-    if UPDATE_README:
+    if flags["UPDATE_README"]:
         prev_readme = "".join(open("README.md", "r").readlines())
         os.remove("README.md")
         with open("README.md", "x", encoding="utf-8") as readme:
@@ -177,12 +256,11 @@ if __name__ == "__main__":
                 prev_readme = prev_readme.split("\n## Benchmarks\n")[0]
             readme.write(prev_readme)
             readme.write("\n## Benchmarks\n")
-            date = datetime.today().strftime('%d.%m.%Y (%H:%M)')
-            readme.write(f"Currently the {SLOWEST} slowest programs are:\n")
+            readme.write(f"Currently the {slo} slowest programs are:\n")
             readme.write("| Time | Project |\n")
             readme.write("| :---: | --- |\n")
             overtime = False
-            for (_, t, path) in all_projects[:SLOWEST]:
+            for (_, t, path) in all_projects[:slo]:
                 if ">" in t:
                     overtime = True
                 readme.write(f"|{t:>8}|{path}|\n")
