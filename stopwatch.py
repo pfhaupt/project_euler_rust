@@ -208,6 +208,7 @@ def ask_for_cli():
     flags["UPDATE_README"] = bool(rdme)
     
     print("Successfully set all flags!")
+    print()
 
 if __name__ == "__main__":
     ask_for_cli()
