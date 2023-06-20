@@ -24,7 +24,7 @@ flags = {
     "TIMEOUT": 1,
     "RELEASE": True,
     "SLOWEST": 10,
-    "UPDATE_README": False
+    "UPDATE_BENCHMARK": False
 }
 
 def get_output(release=False, timeout=999999999):
@@ -196,7 +196,7 @@ def ask_for_cli():
         slo = flags["SLOWEST"]
     flags["SLOWEST"] = slo
 
-    print("Update README? (Default: " + str(flags["UPDATE_README"]) + ")")
+    print("Update Benchmarks? (Default: " + str(flags["UPDATE_BENCHMARK"]) + ")")
     while True:
         rdme = parse_input(int, "Please enter 0 (False) or 1 (True)")
         if rdme == None or rdme == 0 or rdme == 1:
@@ -204,8 +204,8 @@ def ask_for_cli():
         else:
             print("Please enter 0 (False) or 1 (True)")
     if rdme == None:
-        rdme = flags["UPDATE_README"]
-    flags["UPDATE_README"] = bool(rdme)
+        rdme = flags["UPDATE_BENCHMARK"]
+    flags["UPDATE_BENCHMARK"] = bool(rdme)
     
     print("Successfully set all flags!")
     print()
@@ -215,6 +215,8 @@ if __name__ == "__main__":
     
     paths = [folder for folder in os.listdir() if folder.startswith("p")]
     all_projects, crashed, not_sub = [], [], []
+    if flags["UPDATE_BENCHMARK"]:
+        needed_md = []
     for p in paths:
         os.chdir(p)
         print(f"Entering /{p}/")
@@ -229,10 +231,14 @@ if __name__ == "__main__":
                 all_projects.extend(all)
                 crashed.extend(crash)
                 not_sub.extend(not_s)
+                if p not in needed_md:
+                    needed_md.append(p)
             else:
                 print("Skipping folder because no Project ID is in START-END range!")
+                print()
         os.chdir("..")
     
+    orig_projects = all_projects.copy()
     all_projects.sort(key=itemgetter(0), reverse=True)
 
     print("All programs sorted by run time:")
@@ -260,7 +266,37 @@ if __name__ == "__main__":
         print(f"{t:>8}: {path}")
     print()
 
-    if flags["UPDATE_README"]:
+    if flags["UPDATE_BENCHMARK"]:
+        if not os.path.isdir("benchmarks"):
+            print("Did not find directory `benchmarks`, creating it now!")
+            os.mkdir("benchmarks")
+        os.chdir("benchmarks")
+
+        markdown_content = {}
+        for md in needed_md:
+            md = f"{md}.md"
+            if os.path.isfile(md):
+                os.remove(md)
+            markdown_content[md] = []
+            markdown_content[md].append(f"## Benchmarks\n")
+            markdown_content[md].append("| Time | Project |\n")
+            markdown_content[md].append("| :---: | --- |\n")
+        
+        for _, t, p in orig_projects:
+            id = int(re.findall('\d+', p)[0])
+            hundreds = int(id / 100)
+            start = hundreds * 100 + 1
+            end = (hundreds + 1) * 100
+            md = "p{:03d}-p{:03d}.md".format(start, end)
+            markdown_content[md].append(f"|{t:>8}|{p}|\n")
+        
+        for md in markdown_content:
+            with open(md, "x", encoding="utf-8") as file:
+                file.writelines(markdown_content[md])
+
+        print("Updated `benchmarks`-directory with the current benchmarks.")
+        
+        os.chdir("..")
         prev_readme = "".join(open("README.md", "r").readlines())
         os.remove("README.md")
         with open("README.md", "x", encoding="utf-8") as readme:
@@ -277,5 +313,9 @@ if __name__ == "__main__":
                     overtime = True
                 readme.write(f"|{t:>8}|{path}|\n")
             if overtime:
-                readme.write(f"\nA `>` indicates that the program did not finish within my set timeout of {TIMEOUT}s.\n")
-        print("Updated README.md with the current benchmarks.")
+                tmo = flags["TIMEOUT"]
+                readme.write(f"\nA `>` indicates that the program did not finish within my set timeout of {tmo}s.\n\n")
+            else:
+                readme.write("\n\n")
+            readme.write("For a more detailed list of benchmarks, please check the [benchmarks folder](./benchmarks/).  \n")
+        print("Updated README.md with the current slowest projects.")
