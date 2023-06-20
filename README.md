@@ -14,15 +14,15 @@ Currently the 10 slowest programs are:
 | Time | Project |
 | :---: | --- |
 |     >1s|./p093-arithmetic-expressions/Cargo.toml|
-| 688.0ms|./p068-magic-5-gon-ring/Cargo.toml|
-|518.97ms|./p034-digit-factorials/Cargo.toml|
-|482.22ms|./p060-prime-pair-sets/Cargo.toml|
-|470.12ms|./p070-totient-permutation/Cargo.toml|
-|465.25ms|./p074-digit-factorial-chains/Cargo.toml|
-|450.34ms|./p051-prime-digit-replacements/Cargo.toml|
-| 440.5ms|./p073-counting-fractions-in-a-range/Cargo.toml|
-|381.45ms|./p084-monopoly-odds/Cargo.toml|
-|335.68ms|./p010-primes-sum/Cargo.toml|
+|704.09ms|./p068-magic-5-gon-ring/Cargo.toml|
+|542.11ms|./p034-digit-factorials/Cargo.toml|
+|506.35ms|./p070-totient-permutation/Cargo.toml|
+|493.36ms|./p060-prime-pair-sets/Cargo.toml|
+|465.89ms|./p074-digit-factorial-chains/Cargo.toml|
+|439.79ms|./p073-counting-fractions-in-a-range/Cargo.toml|
+|414.14ms|./p051-prime-digit-replacements/Cargo.toml|
+|390.28ms|./p084-monopoly-odds/Cargo.toml|
+|334.71ms|./p010-primes-sum/Cargo.toml|
 
 A `>` indicates that the program did not finish within my set timeout of 1s.
 
