@@ -231,8 +231,9 @@ if __name__ == "__main__":
                 all_projects.extend(all)
                 crashed.extend(crash)
                 not_sub.extend(not_s)
-                if p not in needed_md:
-                    needed_md.append(p)
+                if flags["UPDATE_BENCHMARK"]:
+                    if p not in needed_md:
+                        needed_md.append(p)
             else:
                 print("Skipping folder because no Project ID is in START-END range!")
                 print()
