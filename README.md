@@ -1,5 +1,5 @@
 # Project Euler Solutions
-This repository contains my solutions to various [Project Euler](projecteuler.net) problems, implemented in Rust. It serves as a personal learning project to explore and enhance my Rust programming skills.
+This repository contains my solutions to various [Project Euler](https://projecteuler.net/) problems, implemented in Rust. It serves as a personal learning project to explore and enhance my Rust programming skills.
 ## How to use this Repository
 1. **Choose a Problem:** Browse the list of solved problems and select one that interests you.
 2. **Review the solution:** Check out the Rust source file within the problem's directory for the implementation details. Each file has a link to the problem.
